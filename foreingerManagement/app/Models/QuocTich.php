@@ -9,7 +9,7 @@ class QuocTich extends Model
 {
     use HasFactory;
 
-    protected $table = 'QuocTich';
+    protected $table = 'quoc_tich';
     protected $primaryKey = 'idQuocTich';
     public $timestamps = false;
 

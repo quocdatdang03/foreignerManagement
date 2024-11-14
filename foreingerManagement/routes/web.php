@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NguoiNuocNgoaiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/hello', function () {
     return view('welcome');
 });
+
+
+Route::get('nguoi-nuoc-ngoai/create', [NguoiNuocNgoaiController::class, 'create'])->name('nguoinuocngoai.create');
+Route::post('nguoi-nuoc-ngoai/store', [NguoiNuocNgoaiController::class, 'store'])->name('nguoinuocngoai.store');

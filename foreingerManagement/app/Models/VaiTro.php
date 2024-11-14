@@ -9,7 +9,7 @@ class VaiTro extends Model
 {
     use HasFactory;
 
-    protected $table = 'VaiTro';
+    protected $table = 'vai_tro';
     protected $primaryKey = 'idVaiTro';
     public $timestamps = false;
 

@@ -13,7 +13,7 @@ return new class extends Migration
      */
    public function up()
     {
-        Schema::create('CoSoLuuTru', function (Blueprint $table) {
+        Schema::create('co_so_luu_tru', function (Blueprint $table) {
             $table->id('idCoSo');
             $table->unsignedBigInteger('idNguoiDung');
             $table->unsignedBigInteger('idPhuongXa');
@@ -22,8 +22,8 @@ return new class extends Migration
             $table->char('sdt', 10)->unique();
             $table->string('email')->unique();
             $table->string('loaiHinh');
-            $table->foreign('idNguoiDung')->references('idNguoiDung')->on('NguoiDung');
-            $table->foreign('idPhuongXa')->references('idPhuongXa')->on('PhuongXa');
+            $table->foreign('idNguoiDung')->references('idNguoiDung')->on('nguoi_dung');
+            $table->foreign('idPhuongXa')->references('idPhuongXa')->on('phuong_xa');
             $table->timestamps();
         });
     }

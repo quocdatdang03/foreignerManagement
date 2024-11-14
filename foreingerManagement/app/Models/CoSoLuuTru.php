@@ -9,7 +9,7 @@ class CoSoLuuTru extends Model
 {
     use HasFactory;
 
-    protected $table = 'CoSoLuuTru';
+    protected $table = 'co_so_luu_tru';
     protected $primaryKey = 'idCoSo';
     public $timestamps = false;
 
