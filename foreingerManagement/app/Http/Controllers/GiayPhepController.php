@@ -35,20 +35,20 @@ class GiayPhepController extends Controller
     // }
 
     public function edit($id)
-{
-        // Retrieve all CoSoLuuTru and QuocTichs for dropdown options
-        $coSos = CoSoLuuTru::all();
-        $quocTichs = QuocTich::all();
+    {
+            // Retrieve all CoSoLuuTru and QuocTichs for dropdown options
+            $coSos = CoSoLuuTru::all();
+            $quocTichs = QuocTich::all();
 
-        // Retrieve the GiayPhep with relationships to NguoiNuocNgoai and CoSoLuuTru
-        $giayPhep = GiayPhep::with(['nguoiNuocNgoai', 'coSo'])->find($id);
+            // Retrieve the GiayPhep with relationships to NguoiNuocNgoai and CoSoLuuTru
+            $giayPhep = GiayPhep::with(['nguoiNuocNgoai', 'coSo'])->find($id);
 
-        // dd($giayPhep->ngayDen, $giayPhep->nguoiNuocNgoai->idQuocTich, $giayPhep->idCoSo, $giayPhep->ngayDuKienRoiKhoi);
+            // dd($giayPhep->ngayDen, $giayPhep->nguoiNuocNgoai->idQuocTich, $giayPhep->idCoSo, $giayPhep->ngayDuKienRoiKhoi);
 
 
-        // Return the edit view with GiayPhep, QuocTichs, and CoSos
-        return view('giaypheps.edit', compact('giayPhep', 'quocTichs', 'coSos'));
-}
+            // Return the edit view with GiayPhep, QuocTichs, and CoSos
+            return view('giaypheps.edit', compact('giayPhep', 'quocTichs', 'coSos'));
+    }
 
 
     public function update(Request $request, $id)

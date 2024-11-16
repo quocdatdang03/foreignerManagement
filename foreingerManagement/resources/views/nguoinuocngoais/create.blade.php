@@ -26,7 +26,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('nguoinuocngoai.store') }}" method="POST">
+            <form action="{{ route('nguoinuocngoais.store') }}" method="POST">
                 @csrf
 
                <div class="row row-cols-2">
@@ -135,6 +135,7 @@
             </div>
 
                 <button type="submit" class="btn btn-primary">Đăng ký</button>
+                <a href="{{ route('giaypheps.index') }}" class="btn btn-primary">Xem danh sách thông tin khách tạm trú</a>
             </form>
         </div>
     </div>

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('ngaySinh');
             $table->foreign('idQuocTich')->references('idQuocTich')->on('quoc_tichs');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

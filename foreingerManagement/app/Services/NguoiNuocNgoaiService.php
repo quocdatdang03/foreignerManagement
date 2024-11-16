@@ -5,9 +5,36 @@ namespace App\Services;
 use App\Models\NguoiNuocNgoai;
 use App\Models\GiayPhep;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class NguoiNuocNgoaiService
 {
+
+     public function getAllNguoiNuocNgoais($filters = [])
+    {
+        $query = NguoiNuocNgoai::query()
+            ->with(['quocTich']);
+
+        // // Get the combined search string
+        // if (isset($filters['keyword']) && $filters['keyword']) {
+        //     $searchTerms = explode(' ', $filters['keyword']);  // Split by space
+
+        //     // Loop through each search term and apply it to multiple columns
+        //     foreach ($searchTerms as $term) {
+        //         $query->where(function($query) use ($term) {
+        //             $query->whereHas('nguoiNuocNgoai', function ($query) use ($term) {
+        //                 $query->where('hoTen', 'like', '%' . $term . '%')
+        //                     ->orWhere('soPassport', 'like', '%' . $term . '%');
+        //             })
+        //             ->orWhere('ngayDen', 'like', '%' . $term . '%');
+        //         });
+        //     }
+        // }
+
+        // Phân trang
+        return $query->paginate(3);  // Phân trang 3 mục mỗi trang
+    }
+
     public function registerNguoiNuocNgoai($data)
     {
         // Lưu thông tin người nước ngoài vào bảng NguoiNuocNgoai
@@ -34,4 +61,28 @@ class NguoiNuocNgoaiService
 
         return $nguoiNuocNgoai;
     }
+
+     public function getNguoiNuocNgoaiById($id)
+    {
+        return NguoiNuocNgoai::with(['quocTich'])->findOrFail($id);
+    }
+
+   public function updateNguoiNuocNgoai($id, $data)
+    {
+        DB::beginTransaction();  
+
+        try {
+            // Update GiayPhep
+            $nguoiNuocNgoai = NguoiNuocNgoai::findOrFail($id);
+            $nguoiNuocNgoai->update($data);
+
+            DB::commit();  
+            return $nguoiNuocNgoai;
+
+        } catch (\Exception $e) {
+            DB::rollBack();  
+            throw $e;  
+        }
+    }
+
 }

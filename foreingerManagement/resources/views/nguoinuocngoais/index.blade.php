@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cập nhật Người Nước Ngoài</title>
+    <title>Quản Lý Người Nước Ngoài</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -20,8 +20,6 @@
         @if (Session::has('success'))
         <p class="alert alert-success">{{ Session::get('success') }}</p>
     @endif
-
-   <a href="{{ route('nguoinuocngoais.create') }}" class="btn btn-primary">Đăng ký</a>
 
   <form method="GET" action="{{ route('giaypheps.index') }}" class="mb-4">
         <div class="d-flex gap-1">
@@ -40,36 +38,29 @@
             <tr>
                 <th>Họ tên</th>
                 <th>Số passport</th>
-                <th>Ngày đến</th>
-                <th>Lý do đến</th>
+                <th>Số điện thoại</th>
+                <th>Email</th>
+                <th>Ngày sinh</th>
                 <th>Quốc tịch</th>
-                <th>Cơ sở</th>
                 <th>Hành động</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($giayPheps as $giayPhep)
+            @foreach ($nguoiNuocNgoais as $nguoiNuocNgoai)
                 <tr>
-                    <td>{{ $giayPhep->nguoiNuocNgoai->hoTen }}</td>
-                    <td>{{ $giayPhep->nguoiNuocNgoai->soPassport }}</td>
-                    <td>{{ $giayPhep->ngayDen }}</td>
-                    <td>{{ $giayPhep->lyDoDen }}</td>
-                    <td>{{ $giayPhep->nguoiNuocNgoai->quoctich->tenQuocTich }}</td>
-                    <td>{{ $giayPhep->coSo->tenCoSo }}</td>
+                    <td>{{ $nguoiNuocNgoai->hoTen }}</td>
+                    <td>{{ $nguoiNuocNgoai->soPassport }}</td>
+                    <td>{{ $nguoiNuocNgoai->sdt }}</td>
+                    <td>{{ $nguoiNuocNgoai->email }}</td>
+                    <td>{{ $nguoiNuocNgoai->ngaySinh }}</td>
+                    <td>{{ $nguoiNuocNgoai->quocTich->tenQuocTich }}</td>
                     <td>
-                        <a href="{{ route('giaypheps.edit', $giayPhep->idGiayPhep) }}" class="btn btn-warning btn-sm">Sửa</a>
-                        {{-- 
-                        <form action="{{ route('giaypheps.destroy', $giayPhep->idGiayPhep) }}" method="POST" style="display:inline;">
+                        <a href="{{ route('nguoinuocngoais.edit', $nguoiNuocNgoai->idNguoiNuocNgoai) }}" class="btn btn-warning btn-sm">Sửa</a>
+                        {{-- <form action="{{ route('giaypheps.destroy', $giayPhep->idGiayPhep) }}" method="POST" class="d-inline" onsubmit="return confirm('Bạn có chắc chắn muốn xóa giấy phép này?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
-                        </form>
-                        --}}
-                        <form action="{{ route('giaypheps.destroy', $giayPhep->idGiayPhep) }}" method="POST" class="d-inline" onsubmit="return confirm('Bạn có chắc chắn muốn xóa giấy phép này?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
-                        </form>
+                        </form> --}}
                     </td>
                 </tr>
             @endforeach
@@ -85,22 +76,22 @@
             <nav>
                 <ul class="pagination">
                     <!-- Previous Page Link -->
-                    <li class="page-item {{ $giayPheps->onFirstPage() ? 'disabled' : '' }}">
-                        <a class="page-link" href="{{ $giayPheps->previousPageUrl() }}" aria-label="Previous">
+                    <li class="page-item {{ $nguoiNuocNgoais->onFirstPage() ? 'disabled' : '' }}">
+                        <a class="page-link" href="{{ $nguoiNuocNgoais->previousPageUrl() }}" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
 
                     <!-- Pagination Links -->
-                    @foreach ($giayPheps->links()->elements[0] as $page => $url)
-                        <li class="page-item {{ $page == $giayPheps->currentPage() ? 'active' : '' }}">
+                    @foreach ($nguoiNuocNgoais->links()->elements[0] as $page => $url)
+                        <li class="page-item {{ $page == $nguoiNuocNgoais->currentPage() ? 'active' : '' }}">
                             <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                         </li>
                     @endforeach
 
                     <!-- Next Page Link -->
-                    <li class="page-item {{ $giayPheps->hasMorePages() ? '' : 'disabled' }}">
-                        <a class="page-link" href="{{ $giayPheps->nextPageUrl() }}" aria-label="Next">
+                    <li class="page-item {{ $nguoiNuocNgoais->hasMorePages() ? '' : 'disabled' }}">
+                        <a class="page-link" href="{{ $nguoiNuocNgoais->nextPageUrl() }}" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>

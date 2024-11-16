@@ -32,6 +32,7 @@ return new class extends Migration
             $table->foreign('idNguoiNuocNgoai')->references('idNguoiNuocNgoai')->on('nguoi_nuoc_ngoais');
             $table->foreign('idCoSo')->references('idCoSo')->on('co_so_luu_trus');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
