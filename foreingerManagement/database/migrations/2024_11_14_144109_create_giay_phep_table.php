@@ -13,7 +13,7 @@ return new class extends Migration
      */
    public function up()
     {
-        Schema::create('giay_phep', function (Blueprint $table) {
+        Schema::create('giay_pheps', function (Blueprint $table) {
             $table->id('idGiayPhep');
             $table->unsignedBigInteger('idNguoiNuocNgoai');
             $table->unsignedBigInteger('idCoSo');
@@ -29,8 +29,8 @@ return new class extends Migration
             $table->string('trangThai')->nullable(true);
             $table->text('tepDinhKem')->nullable(true);
             $table->string('lyDoKhongXetDuyet')->nullable(true);
-            $table->foreign('idNguoiNuocNgoai')->references('idNguoiNuocNgoai')->on('nguoi_nuoc_ngoai');
-            $table->foreign('idCoSo')->references('idCoSo')->on('co_so_luu_tru');
+            $table->foreign('idNguoiNuocNgoai')->references('idNguoiNuocNgoai')->on('nguoi_nuoc_ngoais');
+            $table->foreign('idCoSo')->references('idCoSo')->on('co_so_luu_trus');
             $table->timestamps();
         });
     }
@@ -42,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('GiayPhep');
+        Schema::dropIfExists('giay_pheps');
     }
 };

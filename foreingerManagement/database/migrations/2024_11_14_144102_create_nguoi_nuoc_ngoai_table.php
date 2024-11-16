@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('nguoi_nuoc_ngoai', function (Blueprint $table) {
+        Schema::create('nguoi_nuoc_ngoais', function (Blueprint $table) {
             $table->id('idNguoiNuocNgoai');
             $table->unsignedBigInteger('idQuocTich');
             $table->string('hoTen');
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->char('sdt', 10);
             $table->string('email');
             $table->string('ngaySinh');
-            $table->foreign('idQuocTich')->references('idQuocTich')->on('quoc_tich');
+            $table->foreign('idQuocTich')->references('idQuocTich')->on('quoc_tichs');
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('NguoiNuocNgoai');
+        Schema::dropIfExists('nguoi_nuoc_ngoais');
     }
 };

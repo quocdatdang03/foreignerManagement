@@ -9,7 +9,7 @@ class ThongBao extends Model
 {
     use HasFactory;
 
-    protected $table = 'thong_bao';
+    protected $table = 'thong_baos';
     protected $primaryKey = 'idThongBao';
     public $timestamps = false;
 

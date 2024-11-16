@@ -9,11 +9,16 @@ class QuocTich extends Model
 {
     use HasFactory;
 
-    protected $table = 'quoc_tich';
+    protected $table = 'quoc_tichs';
     protected $primaryKey = 'idQuocTich';
     public $timestamps = false;
 
     protected $fillable = [
         'tenQuocTich',
     ];
+
+     public function nguoiNuocNgoais()
+    {
+        return $this->hasMany(NguoiNuocNgoai::class, 'idQuocTich');
+    }
 }

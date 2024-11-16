@@ -9,7 +9,7 @@ class HoSoGiayTo extends Model
 {
     use HasFactory;
 
-    protected $table = 'ho_so_giay_to';
+    protected $table = 'ho_so_giay_tos';
     protected $primaryKey = 'idHoSoGiayTo';
     public $timestamps = false;
 

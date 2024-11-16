@@ -31,8 +31,8 @@ class StoreNguoiNuocNgoaiRequest extends FormRequest
             'ngaySinh' => 'required|date',
             'ngayDen' => 'required|date',
             'lyDoDen' => 'required|string|max:255',
-            'idQuocTich' => 'required|exists:quoc_tich,idQuocTich',
-            'idCoSo' => 'required|exists:co_so_luu_tru,idCoSo',
+            'idQuocTich' => 'required|exists:quoc_tichs,idQuocTich',
+            'idCoSo' => 'required|exists:co_so_luu_trus,idCoSo',
             'ngayDuKienRoiKhoi' => 'required|date',
         ];
     }

@@ -9,7 +9,7 @@ class QuanHuyen extends Model
 {
     use HasFactory;
 
-    protected $table = 'quan_huyen';
+    protected $table = 'quan_huyens';
     protected $primaryKey = 'idQuanHuyen';
     public $timestamps = false;
 

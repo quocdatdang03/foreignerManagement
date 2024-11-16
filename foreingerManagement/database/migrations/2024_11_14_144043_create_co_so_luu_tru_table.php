@@ -13,7 +13,7 @@ return new class extends Migration
      */
    public function up()
     {
-        Schema::create('co_so_luu_tru', function (Blueprint $table) {
+        Schema::create('co_so_luu_trus', function (Blueprint $table) {
             $table->id('idCoSo');
             $table->unsignedBigInteger('idNguoiDung');
             $table->unsignedBigInteger('idPhuongXa');
@@ -22,8 +22,8 @@ return new class extends Migration
             $table->char('sdt', 10)->unique();
             $table->string('email')->unique();
             $table->string('loaiHinh');
-            $table->foreign('idNguoiDung')->references('idNguoiDung')->on('nguoi_dung');
-            $table->foreign('idPhuongXa')->references('idPhuongXa')->on('phuong_xa');
+            $table->foreign('idNguoiDung')->references('idNguoiDung')->on('nguoi_dungs');
+            $table->foreign('idPhuongXa')->references('idPhuongXa')->on('phuong_xas');
             $table->timestamps();
         });
     }
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('CoSoLuuTru');
+        Schema::dropIfExists('co_so_luu_trus');
     }
 };
