@@ -20,10 +20,14 @@ class GiayPhepController extends Controller
     public function index(Request $request)
     {
         // Lấy các bộ lọc từ query parameters
-        $filters = $request->only(['keyword']);
+        $filters = $request->only(['keyword', 'idQuocTich', 'idCoSo']);
         $giayPheps = $this->giayPhepService->getAllGiayPheps($filters);
 
-        return view('giaypheps.index', compact('giayPheps'));
+
+        $coSos = CoSoLuuTru::all();
+        $quocTichs = QuocTich::all();
+
+        return view('giaypheps.index', compact('giayPheps', 'coSos', 'quocTichs'));
     }
 
     // public function edit($id)

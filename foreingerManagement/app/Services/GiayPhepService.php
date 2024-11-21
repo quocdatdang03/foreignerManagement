@@ -13,7 +13,7 @@ class GiayPhepService
         $query = GiayPhep::query()
             ->with(['nguoiNuocNgoai', 'coSo']);
 
-        // Get the combined search string
+        // filter by keyword
         if (isset($filters['keyword']) && $filters['keyword']) {
             $searchTerms = explode(' ', $filters['keyword']);  // Split by space
 
@@ -23,10 +23,22 @@ class GiayPhepService
                     $query->whereHas('nguoiNuocNgoai', function ($query) use ($term) {
                         $query->where('hoTen', 'like', '%' . $term . '%')
                             ->orWhere('soPassport', 'like', '%' . $term . '%');
-                    })
-                    ->orWhere('ngayDen', 'like', '%' . $term . '%');
+                    });
                 });
             }
+        }
+
+
+        // filter by coSo
+        if (isset($filters['idCoSo']) && $filters['idCoSo']) {
+            $query->where('idCoSo', $filters['idCoSo']);
+        }
+
+        // filter by quocTich
+        if (isset($filters['idQuocTich']) && $filters['idQuocTich']) {
+            $query->whereHas('nguoiNuocNgoai', function ($query) use ($filters) {
+                $query->where('idQuocTich', $filters['idQuocTich']);
+            });
         }
 
         // Phân trang

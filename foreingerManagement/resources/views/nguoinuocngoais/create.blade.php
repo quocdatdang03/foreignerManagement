@@ -134,8 +134,12 @@
                 </div>
             </div>
 
-                <button type="submit" class="btn btn-primary">Đăng ký</button>
-                <a href="{{ route('giaypheps.index') }}" class="btn btn-primary">Xem danh sách thông tin khách tạm trú</a>
+            <div class="row mb-3">
+                 <button type="submit" class="btn btn-primary col-6 offset-3">Đăng ký</button>
+            </div>
+            <div class="d-flex items-center gap-3 justify-content-center">
+                <a href="{{ route('giaypheps.index') }}" class="btn btn-secondary">Quay lại</a>
+            </div>
             </form>
         </div>
     </div>

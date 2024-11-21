@@ -89,7 +89,13 @@
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary">Cập nhật</button>
+             <div class="row mb-3">
+                 <button type="submit" class="btn btn-primary col-6 offset-3">Cập nhật</button>
+            </div>
+            <div class="d-flex items-center gap-3 justify-content-center">
+                <a href="{{ route('nguoinuocngoais.index') }}" class="btn btn-secondary">Quay lại</a>
+            </div>
+            </form>
         </form>
     </div>
 </div>

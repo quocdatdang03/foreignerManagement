@@ -15,23 +15,25 @@ class NguoiNuocNgoaiService
         $query = NguoiNuocNgoai::query()
             ->with(['quocTich']);
 
-        // // Get the combined search string
-        // if (isset($filters['keyword']) && $filters['keyword']) {
-        //     $searchTerms = explode(' ', $filters['keyword']);  // Split by space
+        // filter by keyword
+        if (isset($filters['keyword']) && $filters['keyword']) {
+            $searchTerms = explode(' ', $filters['keyword']);  // Split by space
 
-        //     // Loop through each search term and apply it to multiple columns
-        //     foreach ($searchTerms as $term) {
-        //         $query->where(function($query) use ($term) {
-        //             $query->whereHas('nguoiNuocNgoai', function ($query) use ($term) {
-        //                 $query->where('hoTen', 'like', '%' . $term . '%')
-        //                     ->orWhere('soPassport', 'like', '%' . $term . '%');
-        //             })
-        //             ->orWhere('ngayDen', 'like', '%' . $term . '%');
-        //         });
-        //     }
-        // }
+            // Loop through each search term and apply it to multiple columns
+            foreach ($searchTerms as $term) {
+                $query->where(function($query) use ($term) {
+                        $query->where('hoTen', 'like', '%' . $term . '%')
+                            ->orWhere('soPassport', 'like', '%' . $term . '%');
+                });
+            }
+        }
 
-        // Phân trang
+        // filter by quocTich
+        if (isset($filters['idQuocTich']) && $filters['idQuocTich']) {
+            $query->where('idQuocTich', $filters['idQuocTich']);
+        }
+
+        // paginate
         return $query->paginate(3);  // Phân trang 3 mục mỗi trang
     }
 

@@ -21,10 +21,15 @@ class NguoiNuocNgoaiController extends Controller
     public function index(Request $request)
     {
         // Lấy các bộ lọc từ query parameters
-        $filters = $request->only(['keyword']);
+        $filters = $request->only(['keyword', 'idQuocTich']);
         $nguoiNuocNgoais = $this->nguoiNuocNgoaiService->getAllNguoiNuocNgoais($filters);
 
-        return view('nguoinuocngoais.index', compact('nguoiNuocNgoais'));
+        // combine filter and paginate :
+        $nguoiNuocNgoais->appends($filters);
+
+        $quocTichs = QuocTich::all();
+
+        return view('nguoinuocngoais.index', compact('nguoiNuocNgoais', 'quocTichs'));
     }
 
     // Hiển thị form đăng ký

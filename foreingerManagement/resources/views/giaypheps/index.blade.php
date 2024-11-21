@@ -21,15 +21,44 @@
         <p class="alert alert-success">{{ Session::get('success') }}</p>
     @endif
 
-   <a href="{{ route('nguoinuocngoais.create') }}" class="btn btn-primary">Đăng ký</a>
+    <div class="my-3">
+        <a href="{{ route('nguoinuocngoais.create') }}" class="btn btn-primary">Đăng ký</a>
+    </div>
 
   <form method="GET" action="{{ route('giaypheps.index') }}" class="mb-4">
         <div class="d-flex gap-1">
             <div class="">
-                <input type="text" name="keyword" placeholder="Nhập từ khóa để tìm kiếm" value="{{ request()->search }}" class="form-control">
+                <input type="search" name="keyword" placeholder="Nhập từ khóa để tìm kiếm" value="{{ request()->get('keyword') }}" class="form-control">
+            </div>
+            <!-- Combobox Quốc Tịch -->
+            <div class="">
+                <select name="idQuocTich" class="form-select">
+                    <option value="">Chọn Quốc Tịch</option>
+                    @foreach ($quocTichs as $quocTich)
+                        <option value="{{ $quocTich->idQuocTich }}" 
+                                {{ request()->get('idQuocTich') == $quocTich->idQuocTich ? 'selected' : '' }}>
+                            {{ $quocTich->tenQuocTich }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <!-- Combobox Cơ sở -->
+            <div class="">
+                <select name="idCoSo" class="form-select">
+                    <option value="">Chọn Cơ sở</option>
+                    @foreach ($coSos as $coSo)
+                        <option value="{{ $coSo->idCoSo }}" 
+                                {{ request()->get('idCoSo') == $coSo->idCoSo ? 'selected' : '' }}>
+                            {{ $coSo->tenCoSo }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
             <div class="d-flex">
                 <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+            </div>
+               <div class="">
+                <a href="{{ route('giaypheps.index') }}" class="btn btn-secondary">Clear</a>
             </div>
         </div>
     </form>
