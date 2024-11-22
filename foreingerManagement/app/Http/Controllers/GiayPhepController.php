@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NguoiNuocNgoaiRequest;
+use App\Mail\GiayPhepKhongPheDuyet;
+use App\Mail\GiayPhepPheDuyet;
 use App\Models\CoSoLuuTru;
 use App\Models\GiayPhep;
 use App\Models\QuocTich;
 use App\Services\GiayPhepService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class GiayPhepController extends Controller
 {
@@ -28,6 +32,19 @@ class GiayPhepController extends Controller
         $quocTichs = QuocTich::all();
 
         return view('giaypheps.index', compact('giayPheps', 'coSos', 'quocTichs'));
+    }
+
+     public function index_xetduyet(Request $request)
+    {
+        // Lấy các bộ lọc từ query parameters
+        $filters = $request->only(['keyword', 'idQuocTich', 'idCoSo']);
+        $giayPheps = $this->giayPhepService->getAllGiayPheps($filters);
+
+
+        $coSos = CoSoLuuTru::all();
+        $quocTichs = QuocTich::all();
+
+        return view('giaypheps.xetduyet', compact('giayPheps', 'coSos', 'quocTichs'));
     }
 
     // public function edit($id)
@@ -54,24 +71,29 @@ class GiayPhepController extends Controller
             return view('giaypheps.edit', compact('giayPhep', 'quocTichs', 'coSos'));
     }
 
-
-    public function update(Request $request, $id)
+    public function edit_xetduyet($id)
     {
-        // Validate dữ liệu
-        $validated = $request->validate([
-            'hoTen' => 'required|string|max:255',
-            'soPassport' => 'required|string|max:255',
-            'sdt' => 'required|string|max:10',
-            'email' => 'required|email|max:255',
-            'ngaySinh' => 'required|date',
-            'ngayDen' => 'required|date',
-            'lyDoDen' => 'required|string|max:255',
-            'idQuocTich' => 'required|exists:quoc_tichs,idQuocTich',
-            'idCoSo' => 'required|exists:co_so_luu_trus,idCoSo',
-            'ngayDuKienRoiKhoi' => 'required|date',
-        ]);
+            // Retrieve all CoSoLuuTru and QuocTichs for dropdown options
+            $coSos = CoSoLuuTru::all();
+            $quocTichs = QuocTich::all();
+
+            // Retrieve the GiayPhep with relationships to NguoiNuocNgoai and CoSoLuuTru
+            $giayPhep = GiayPhep::with(['nguoiNuocNgoai', 'coSo'])->find($id);
+
+            // dd($giayPhep->ngayDen, $giayPhep->nguoiNuocNgoai->idQuocTich, $giayPhep->idCoSo, $giayPhep->ngayDuKienRoiKhoi);
+
+
+            // Return the edit view with GiayPhep, QuocTichs, and CoSos
+            return view('giaypheps.xetduyet_edit', compact('giayPhep', 'quocTichs', 'coSos'));
+    }
+
+
+
+    public function update(NguoiNuocNgoaiRequest $request, $id)
+    {
+       
         // dd($validated);
-        $updatedGiayPhep = $this->giayPhepService->updateGiayPhep($id, $validated);
+       $updatedGiayPhep = $this->giayPhepService->updateGiayPhep($id, $request->validated());
         return redirect()->route('giaypheps.index')->with('success', 'Cập nhật giấy phép thành công!');
     }
 
@@ -80,4 +102,54 @@ class GiayPhepController extends Controller
         $this->giayPhepService->deleteGiayPhep($id);
         return redirect()->route('giaypheps.index')->with('success', 'Xóa giấy phép thành công!');
     }
+
+    public function approve($id)
+    {
+        $giayPhep = GiayPhep::find($id);
+
+        if (!$giayPhep) {
+            return redirect()->route('giaypheps.index.xet_duyet')->with('error', 'Giấy phép không tồn tại.');
+        }
+
+        // Cập nhật trạng thái giấy phép thành "Đã phê duyệt"
+        $giayPhep->trangThai = 'Đã phê duyệt';
+        $giayPhep->lyDoKhongXetDuyet = null;
+        $giayPhep->save();
+
+        //dd($giayPhep->coSo->email);
+
+        // Gửi email thông báo
+        Mail::to($giayPhep->coSo->email)
+            ->send(new GiayPhepPheDuyet($giayPhep));
+
+        return redirect()->route('giaypheps.index.xet_duyet')->with('success', 'Giấy phép đã được phê duyệt và email đã được gửi.');
+    }
+
+    public function reject(Request $request, $id)
+    {
+        // Tìm kiếm giấy phép theo ID
+        $giayPhep = GiayPhep::find($id);
+
+        if (!$giayPhep) {
+            return redirect()->route('giaypheps.index.xet_duyet')->with('error', 'Giấy phép không tồn tại.');
+        }
+
+        // Kiểm tra lý do từ chối có được gửi không
+        $lyDoKhongXetDuyet = $request->input('lyDoKhongXetDuyet');
+        if (!$lyDoKhongXetDuyet) {
+            return redirect()->route('giaypheps.index.xet_duyet')->with('error', 'Vui lòng nhập lý do từ chối.');
+        }
+
+        // Cập nhật trạng thái và lý do từ chối
+        $giayPhep->trangThai = 'Không phê duyệt';
+        $giayPhep->lyDoKhongXetDuyet = $lyDoKhongXetDuyet;
+        $giayPhep->save();
+
+        // Gửi email thông báo
+        Mail::to($giayPhep->coSo->email)
+            ->send(new GiayPhepKhongPheDuyet($giayPhep));
+
+        return redirect()->route('giaypheps.index.xet_duyet')->with('success', 'Giấy phép đã bị từ chối và email đã được gửi.');
+    }
+
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CoSoLuuTru;
 use App\Models\QuocTich;
 use App\Services\NguoiNuocNgoaiService;
-use App\Http\Requests\StoreNguoiNuocNgoaiRequest;
+use App\Http\Requests\NguoiNuocNgoaiRequest;
 use App\Models\NguoiNuocNgoai;
 use Illuminate\Http\Request;
 
@@ -41,7 +41,7 @@ class NguoiNuocNgoaiController extends Controller
     }
 
     // Xử lý form đăng ký và lưu dữ liệu vào cả 2 bảng
-    public function store(StoreNguoiNuocNgoaiRequest $request)
+    public function store(NguoiNuocNgoaiRequest $request)
     {
         // Gọi service để xử lý đăng ký và lưu dữ liệu
         $this->nguoiNuocNgoaiService->registerNguoiNuocNgoai($request->validated());
@@ -66,15 +66,32 @@ class NguoiNuocNgoaiController extends Controller
     public function update(Request $request, $id)
     {
         // Validate dữ liệu
-        $validated = $request->validate([
-            'hoTen' => 'required|string|max:255',
-            'soPassport' => 'required|string|max:255',
-            'sdt' => 'required|string|max:10',
-            'email' => 'required|email|max:255',
-            'ngaySinh' => 'required|date',
-            'idQuocTich' => 'required|exists:quoc_tichs,idQuocTich',
-        ]);
-        // dd($validated);
+        $validated = $request->validate(
+            [
+                'hoTen' => 'required|string|max:255',
+                'soPassport' => 'required|string|max:255',
+                'sdt' => 'required|string|max:10',
+                'email' => 'required|email|max:255',
+                'ngaySinh' => 'required|date',
+                'idQuocTich' => 'required|exists:quoc_tichs,idQuocTich',
+            ],
+            [
+                'hoTen.required' => 'Họ tên không được để trống.',
+                'hoTen.max' => 'Họ tên không được vượt quá 255 ký tự.',
+                'soPassport.required' => 'Số passport không được để trống.',
+                'soPassport.max' => 'Số passport không được vượt quá 255 ký tự.',
+                'sdt.required' => 'Số điện thoại không được để trống.',
+                'sdt.max' => 'Số điện thoại không được vượt quá 10 ký tự.',
+                'email.required' => 'Email không được để trống.',
+                'email.email' => 'Email không hợp lệ.',
+                'email.max' => 'Email không được vượt quá 255 ký tự.',
+                'ngaySinh.required' => 'Ngày sinh không được để trống.',
+                'ngaySinh.date' => 'Ngày sinh phải là định dạng ngày hợp lệ.',
+                'idQuocTich.required' => 'Quốc tịch không được để trống.',
+                'idQuocTich.exists' => 'Quốc tịch không tồn tại trong hệ thống.',
+            ]
+        );
+        
         $updatedNguoiNuocNgoai = $this->nguoiNuocNgoaiService->updateNguoiNuocNgoai($id, $validated);
         return redirect()->route('nguoinuocngoais.index')
                         ->with('success', 'Cập nhật thông tin người nước ngoài thành công!');

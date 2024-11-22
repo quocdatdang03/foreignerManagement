@@ -17,34 +17,40 @@
 </head>
 <body>
     <div class="container mt-5">
-        @if (Session::has('success'))
+    @if (Session::has('success'))
         <p class="alert alert-success">{{ Session::get('success') }}</p>
     @endif
 
+    <div class="my-3">
+        <h1>Quản lý thông tin người nước ngoài</h1>
+    </div>
+
   <form method="GET" action="{{ route('nguoinuocngoais.index') }}" class="mb-4">
-        <div class="d-flex gap-1">
+        <div class="row row-cols-2">
             <div class="">
                 <input type="search" name="keyword" placeholder="Nhập từ khóa để tìm kiếm" value="{{ request()->get('keyword') }}" class="form-control">
             </div>
 
-            <!-- Combobox Quốc Tịch -->
-            <div class="">
-                <select name="idQuocTich" class="form-select">
-                    <option value="">Chọn Quốc Tịch</option>
-                    @foreach ($quocTichs as $quocTich)
-                        <option value="{{ $quocTich->idQuocTich }}" 
-                                {{ request()->get('idQuocTich') == $quocTich->idQuocTich ? 'selected' : '' }}>
-                            {{ $quocTich->tenQuocTich }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="d-flex">
-                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-            </div>
-            <div class="">
-                <a href="{{ route('nguoinuocngoais.index') }}" class="btn btn-secondary">Clear</a>
-            </div>
+           <div class="d-flex items-center gap-2">
+                <!-- Combobox Quốc Tịch -->
+                <div class="">
+                    <select name="idQuocTich" class="form-select">
+                        <option value="">Chọn Quốc Tịch</option>
+                        @foreach ($quocTichs as $quocTich)
+                            <option value="{{ $quocTich->idQuocTich }}" 
+                                    {{ request()->get('idQuocTich') == $quocTich->idQuocTich ? 'selected' : '' }}>
+                                {{ $quocTich->tenQuocTich }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="d-flex">
+                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                </div>
+                <div class="">
+                    <a href="{{ route('nguoinuocngoais.index') }}" class="btn btn-secondary">Clear</a>
+                </div>
+           </div>
         </div>
     </form>
 

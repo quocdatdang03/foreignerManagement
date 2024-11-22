@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cập nhật Người Nước Ngoài</title>
+    <title>Cập nhật giấy phép</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -138,6 +138,20 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+
+                {{-- Trạng thái --}}
+                <div>
+                    <p class="d-flex align-items-center gap-1">
+                       <span>Trạng thái: </span>
+                        <span class="badge badge
+                            @if ($giayPhep->trangThai === 'Đang xử lý') bg-secondary 
+                            @elseif ($giayPhep->trangThai === 'Đã phê duyệt') bg-success 
+                            @elseif ($giayPhep->trangThai === 'Không phê duyệt') bg-danger 
+                            @endif">
+                            {{ $giayPhep->trangThai }}
+                        </span>
+                    </p>
+                </div>
             </div>
 
             <!-- Submit Button -->
@@ -145,7 +159,7 @@
                  <button type="submit" class="btn btn-primary col-6 offset-3">Cập nhật</button>
             </div>
              <div class="d-flex items-center gap-3 justify-content-center">
-                <a href="{{ route('giaypheps.index') }}" class="btn btn-secondary">Quay lại</a>
+                <a href="{{ route('giaypheps.index') }}" class="btn btn-secondary px-5">Quay lại</a>
             </div>
         </form>
     </div>
