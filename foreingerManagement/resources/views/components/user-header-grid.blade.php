@@ -30,7 +30,11 @@
             <a href="">LIÊN HỆ</a>
         </div>
         <div class="item seach">
-            <input type="text">
+            <form action="{{ route('accommodation.search.submit') }}" method="POST">
+                @csrf
+                <input type="text" name="keyword" placeholder="Tìm kiếm cơ sở lưu trú..." style="padding: 5px; width: 200px;">
+                <button type="submit" style="padding: 5px;">Tìm</button>
+            </form>
         </div>
         <div class="item user" id="user_show">
             <a href="{{ route('user.home') }}">Xin chào {{ Auth::user()->hoVaTen }}</a>

@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             VaiTroSeeder::class,
             NguoiDungSeeder::class,
+            CoSoLuuTruSeeder::class,
         ]);
     }
 }

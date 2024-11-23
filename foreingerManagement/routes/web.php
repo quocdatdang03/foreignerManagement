@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\UpdateUserInfoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\User\SearchCoSoLuuTruController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -50,7 +51,7 @@ Route::middleware('guest')->group(function () {
 Route::get('/verify-email/{id}/{hash}', [RegisteredUserController::class, 'verify'])
     ->name('verification.verify')
     ->middleware(['signed']);
-
+Route::post('/search-accommodation', [SearchCoSoLuuTruController::class, 'search'])->name('accommodation.search.submit');
 
 Route::get('auth/google', [GoogleAuthController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('auth/google/callback', [GoogleAuthController::class, 'handleGoogleCallback']);
