@@ -41,45 +41,63 @@
 
 
     <div class="main grid">
-        <div class="container registry login">
-            <h3>Đổi Mật Khẩu</h3>
+        <div class="router grid wide">
+            <h2>Cập nhật thông tin cá nhân</h2>
+        </div>
+        <div class="container registry">
             <div class="boxwide">
-                @if (session('success'))
-                <div style="color: green; margin-bottom: 10px;">{{ session('success') }}</div>
+                @if(session('success'))
+                <div style="color: green; font-size: 14px; margin-bottom: 10px;">
+                    {{ session('success') }}
+                </div>
                 @endif
 
                 @if ($errors->any())
-                <div style="color: red; margin-bottom: 10px;">
+                <div style="color: red; font-size: 14px; margin-bottom: 10px;">
                     {{ $errors->first() }}
                 </div>
                 @endif
 
-                <form method="POST" action="{{ route('password.update') }}">
+                <form method="POST" action="{{ route('user.update-info.update') }}">
                     @csrf
+
                     <div class="box">
                         <div class="col">
+                            <!-- Email (readonly) -->
                             <div class="item">
-                                <p>Mật Khẩu Hiện Tại:</p>
-                                <div class="daybox pass">
-                                    <input type="password" name="current_password" required>
+                                <p>Email:</p>
+                                <div class="daybox acc">
+                                    <input type="email" name="email" value="{{ $user->email }}" readonly>
                                 </div>
                             </div>
+
+                            <!-- Họ và Tên -->
                             <div class="item">
-                                <p>Mật Khẩu Mới:</p>
-                                <div class="daybox pass">
-                                    <input type="password" name="new_password" required>
+                                <p>Họ và Tên:</p>
+                                <div class="daybox acc">
+                                    <input type="text" name="hoVaTen" value="{{ old('hoVaTen', $user->hoVaTen) }}" required>
                                 </div>
                             </div>
+
+                            <!-- Số Điện Thoại -->
                             <div class="item">
-                                <p>Nhập Lại Mật Khẩu Mới:</p>
-                                <div class="daybox pass">
-                                    <input type="password" name="new_password_confirmation" required>
+                                <p>Số Điện Thoại:</p>
+                                <div class="daybox acc">
+                                    <input type="text" name="sdt" value="{{ old('sdt', $user->sdt) }}" required>
+                                </div>
+                            </div>
+
+                            <!-- Số CCCD -->
+                            <div class="item">
+                                <p>Số CCCD (*):</p>
+                                <div class="daybox acc">
+                                    <input type="text" name="soCCCD" value="{{ old('soCCCD', $user->soCCCD) }}" required>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="regis">
-                        <button type="submit">Đổi Mật Khẩu</button>
+                        <button type="submit">Cập nhật</button>
                     </div>
                 </form>
             </div>

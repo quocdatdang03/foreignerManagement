@@ -90,7 +90,6 @@
     right: 7px;
 }
 .registry .box .item .daybox::before{
-    background-image: url("../image/Calendar.png");
     left: 10px;
 }
 

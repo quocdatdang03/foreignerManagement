@@ -90,7 +90,7 @@
                         </div>
                         <div class="item">
                             <p>Số Điện Thoại (*):</p>
-                            <div class="daybox acc">
+                            <div class="daybox">
                                 <input type="text" name="sdt" value="{{ old('sdt') }}" required>
                                 @if ($errors->has('sdt'))
                                 <div style="color: red; font-size: 12px;">{{ $errors->first('sdt') }}</div>
@@ -99,7 +99,7 @@
                         </div>
                         <div class="item">
                             <p>Số CCCD (*):</p>
-                            <div class="daybox acc">
+                            <div class="daybox">
                                 <input type="text" name="soCCCD" value="{{ old('soCCCD') }}" required>
                                 @if ($errors->has('soCCCD'))
                                 <div style="color: red; font-size: 12px;">{{ $errors->first('soCCCD') }}</div>

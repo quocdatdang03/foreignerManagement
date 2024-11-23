@@ -1,23 +1,12 @@
 <?php
 
+use App\Http\Controllers\Auth\UpdateUserInfoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\GoogleAuthController;
-
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
@@ -46,6 +35,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/change-password', [ChangePasswordController::class, 'index'])->name('password.change');
         Route::post('/change-password', [ChangePasswordController::class, 'update'])->name('password.update');
     });
+
+    Route::get('/user/update-info', [UpdateUserInfoController::class, 'index'])->name('user.update-info');
+    Route::post('/user/update-info', [UpdateUserInfoController::class, 'update'])->name('user.update-info.update');
 });
 
 Route::get('/login', [AuthenticatedSessionController::class, 'showLoginForm'])->name('login');

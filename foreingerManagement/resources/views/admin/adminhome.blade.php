@@ -97,9 +97,9 @@
 
     <div class="main grid">
         <div class="container grid wide updateuser"  id="list_tb">
-            <!-- <div class="item_tb" >
-                    <a href="">vi phạm</a>
-            </div> -->
+            <div class="item_tb" >
+                    <a href="">Trang quản trị viên</a>
+            </div>
         </div>
     </div>
 </div>
