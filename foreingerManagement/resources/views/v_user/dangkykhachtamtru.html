@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../fe/css/grid.css">
+    <link rel="stylesheet" href="../fe/css/header-footer.css">
+    <link rel="stylesheet" href="../fe/css/registry.css">
+    <script src="../fe/js/jquery.js"></script>
+</head>
+<body>
+    <div class="header grid">
+        <div class="container gridhead wide">
+            <div class="item">
+                <div class="logo">
+                    <a href="./home.html"><img src="../fe/image/logo.png" alt=""></a>
+                </div>
+            </div>
+            <div class="item">
+                <a href="">TRANG CHỦ</a>
+            </div>
+            <div class="item">
+                <a href="">GIỚI THIỆU</a>
+            </div>
+            <div class="item">
+                <a href="">THỦ TỤC</a>
+            </div>
+            <div class="item">
+                <a href="">QUY ĐỊNH</a>
+            </div>
+            <div class="item">
+                <a href="">HỖ TRỢ</a>
+            </div>
+            <div class="item">
+                <a href="">THÔNG TIN</a>
+            </div>
+            <div class="item">
+                <a href="">TIN TỨC</a>
+            </div>
+            <div class="item">
+                <a href="">LIÊN HỆ</a>
+            </div>
+            <div class="item seach">
+               <input type="text">
+            </div>
+            <div class="item user"  id="user_show">
+                <a href="">ĐĂNG NHẬP</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="main grid">
+        <div class="router grid wide">
+            <a href="">ĐĂNG KÝ KHÁCH TẠM TRÚ</a>
+        </div>
+        <div class="container registry">
+
+            <h3>THÔNG TIN KHÁCH TẠM TRÚ</h3>
+            <a href="./capnhatthontinkhachtamtru.html">danh sách khách tạm trú</a>
+            <form class="boxwide" enctype="multipart/form-data" id="form_data" >
+                <div class="item">
+                    <p>Cơ sở lưu trú:</p>
+                    <select name="" id="list_cslt">
+                       
+                    </select>
+                </div>
+                <div class="box">
+                    <div class="col">
+                        <div class="item">
+                            <p>Họ và tên (*):</p>
+                            <input type="text" id="k_name">
+                        </div>
+                        <div class="item">
+                            <p>Số passport (*):</p>
+                            <input type="text" id="k_pp">
+                        </div>
+                        <div class="item">
+                            <p>Email (*):</p>
+                            <input type="text" id="k_email">
+                        </div>
+                        <div class="item">
+                            <p>Ngày đến (*):</p>
+                            <input type="date" id="k_datein">
+                        </div>
+                        <div class="item">
+                            <p>Lý do tạm trú (*):</p>
+                            <input type="text" id="k_lydo">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="item">
+                            <p>Ngày sinh (*):</p>
+                            <input type="date" id="k_birth">
+                        </div>
+                        <div class="item">
+                            <p>Số điện thoại (*):</p>
+                            <input type="text" id="k_phone">
+                        </div>
+                        <div class="item">
+                            <p>Quốc tịch (*):</p>
+                            <select  id="quoctich">
+                                <option value="0"></option>
+                            </select>
+                        </div>
+                        <div class="item">
+                            <p>Ngày đi dự kiến (*):</p>
+                            <input type="date" id="k_dateout">
+                        </div>
+                        <div class="item">
+                            <p>Tệp đính kèm:</p>
+                            <input type="file" id="k_file" > 
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="regis">
+                  
+                    <button id="btn_add" type="submit">Đăng Ký</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="footer grid">
+        <div class="container gridfoot" >
+            <div class="logo">
+                <img src="../fe/image/logo.png" alt="">
+            </div>
+            <div class="info">
+                <h3>BẢN QUYỀN CỦA ỦY BAN NHÂN DÂN THÀNH PHỐ ĐÀ NẴNG</h3>
+                <p><b>Giấy phép:</b> 612/GP-STTTT cấp ngày 21 tháng 10 năm 2016.</p>
+                <p><b>Trưởng Ban biên tập:</b> Trần Chí Cường, Phó Chủ tịch UBND thành phố.</p>
+                <p><b>Trụ sở:</b> 24 Trần Phú, P.Thạch Thang, Q. Hải Châu, TP. Đà Nẵng.</p>
+                <p><b>Điện thoại:</b> (+84.236) 3.817.366 </p>
+                <p><b>Email:</b> toasoan@danang.gov.vn</p>
+
+            </div>
+        </div>
+    </div>
+    <script src="../fe/js/user.js"></script>
+    <script src="../fe/js/quoctich.js"></script>
+    <script>
+        const list_cslt = document.getElementById("list_cslt")
+        async function getvalue(){
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                type: "get",
+                url: "http://localhost:8080/api/accommodation/all",
+                headers:{"Authorization": 'Bearer '+token },
+                
+                success: function(data) {
+                    console.log(data)
+                    let listcs = data.content
+                    for(i=0;i<listcs.length;i++){
+                        list_cslt.innerHTML +=  ` <div class="roww table row" onclick="bindvalue('${listcs[i].id}')">
+                            <option value="${listcs[i].id}">${listcs[i].tenCoSo}</option>`
+                    }
+                   resolve()
+
+                },error:function(message){
+                    console.log(message)
+                    alert(message?.responseJSON?.message||"có lỗi sảy ra")
+                   
+                }
+            })
+            })
+        }
+
+        getvalue()
+    </script>
+    <script>
+         const k_birth = document.getElementById("k_birth")
+        const k_datein = document.getElementById("k_datein")
+        const k_dateout = document.getElementById("k_dateout")
+        const k_email = document.getElementById("k_email")
+        const k_file = document.getElementById("k_file")
+        const k_lydo = document.getElementById("k_lydo")
+        const k_name = document.getElementById("k_name")
+        const k_phone = document.getElementById("k_phone")
+        const k_pp = document.getElementById("k_pp")
+          document.addEventListener("DOMContentLoaded", function() {
+            $("#form_data").on('submit', function(e) {
+                e.preventDefault();
+                var formData = new FormData()
+
+                formData.append("file", k_file.files[0]);
+                let requestData = {
+                        "hoVaTen":k_name.value,
+                        "soPassport":k_pp.value,
+                        "sdt": k_phone.value,
+                        "email": k_email.value,
+                        "ngaySinh": k_birth.value,
+                        "ngayDen":k_datein.value+" 00:00",
+                        "ngayDiDuKien":k_dateout.value+" 00:00",
+                        "lyDoTamTru": k_lydo.value,
+                        "quocTichId": quoctich.value
+                };
+                console.log(requestData)
+                formData.append("request", new Blob([JSON.stringify(requestData)], { type: "application/json" }));
+
+                $.ajax({
+                    "url": "http://localhost:8080/api/foreigner/"+list_cslt.value,
+                    "method": "POST",
+                    "timeout": 0,
+                    "headers": {
+                            "Authorization": "Bearer "+token
+                        },
+                    "processData": false,
+                    "mimeType": "multipart/form-data",
+                    "contentType": false,
+                    "data": formData,
+                    success: function(data) {
+                        console.log(data)
+                        alert("Thêm thành công")
+                        window.location.reload()
+                    },error:function(message){
+                        console.log(message)
+                        alert(message?.responseJSON?.message||"có lỗi sảy ra")
+                    
+                    }
+                })
+            });
+        });
+    </script>
+    <!-- <script>
+        const k_birth = document.getElementById("k_birth")
+        const k_datein = document.getElementById("k_datein")
+        const k_dateout = document.getElementById("k_dateout")
+        const k_email = document.getElementById("k_email")
+        const k_file = document.getElementById("k_file")
+        const k_lydo = document.getElementById("k_lydo")
+        const k_name = document.getElementById("k_name")
+        const k_phone = document.getElementById("k_phone")
+        const k_pp = document.getElementById("k_pp")
+
+        const btn_add = document.getElementById("btn_add")
+        const rawdata = document.getElementById("form_data")
+        console.log(rawdata)
+               rawdata.addEventListener('submit',e=>{
+                e.preventDefault()
+                console.log(rawdata)
+
+                // var value_app = {
+                //     "hoVaTen":k_name.value,
+                //     "soPassport":k_pp.value,
+                //     "sdt": k_phone.value,
+                //     "email": k_email.value,
+                //     "ngaySinh": k_birth.value,
+                //     "ngayDen":k_datein.value,
+                //     "ngayDiDuKien":k_dateout.value,
+                //     "lyDoTamTru": k_lydo.value,
+                //     "quocTichId": quoctich.value
+                // }
+
+                var value_app ={
+                    "request": {
+                        "hoVaTen": "string",
+                        "soPassport": "string",
+                        "sdt": "string",
+                        "email": "string",
+                        "ngaySinh": "2024-05-23T11:04:29.479Z",
+                        "ngayDen": "2024-05-23T11:04:29.479Z",
+                        "ngayDiDuKien": "2024-05-23T11:04:29.479Z",
+                        "lyDoTamTru": "string",
+                        "quocTichId": "string"
+                    },
+                    "file":k_file.files[0]
+                    }
+              
+                console.log(value_app)
+                $.ajax({
+                type: "POST",
+                
+                url: "http://localhost:8080/api/foreigner/"+user_id,
+                headers:{"Authorization": 'Bearer '+token},
+                data:JSON.stringify(value_app),
+                contentType:'application/json',
+                success: function(data) {
+                    console.log(data)
+                    alert("cập nhật thành công")
+         
+
+                },error:function(message){
+                    console.log(message)
+                    alert(message.responseJSON.message)
+                    // window.location.href = "./dangnhap.html"
+                }
+            })
+               })
+
+    </script> -->
+</body>
+</html>

@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -31,7 +31,23 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Trang userhome
+    Route::get('/userhome', function () {
+        return view('user.userhome');
+    })->name('user.home')->middleware('role:1'); // idVaiTro = 1 cho User
+
+    // Trang adminhome
+    Route::get('/adminhome', function () {
+        return view('admin.adminhome');
+    })->name('admin.home')->middleware('role:2'); // idVaiTro = 2 cho Admin
+
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/change-password', [ChangePasswordController::class, 'index'])->name('password.change');
+        Route::post('/change-password', [ChangePasswordController::class, 'update'])->name('password.update');
+    });
 });
+
 Route::get('/login', [AuthenticatedSessionController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthenticatedSessionController::class, 'login']);
 Route::post('/logout', [AuthenticatedSessionController::class, 'logout'])->name('logout');

@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../fe/css/grid.css">
+    <link rel="stylesheet" href="../fe/css/header-footer.css">
+    <link rel="stylesheet" href="../fe/css/update.css">
+    <link rel="stylesheet" href="../fe/css/quanlytaikhoan.css">
+    <link rel="stylesheet" href="../fe/css/menu.css">
+    <script src="../fe/js/jquery.js"></script>
+    <style>
+        .updateuser{
+            margin-top: 100px;
+        }
+        .item_tb{
+            margin:30px 0px 0px 30px;
+        }
+
+        .item_tb a{
+           font-size: 25px;
+           color: red;
+     
+        }
+
+        .item_tb a:hover{
+     
+           color: rgb(255, 141, 141);
+     
+        }
+    </style>
+</head>
+<body>
+    <div class="header grid">
+        <div class="container gridhead wide">
+            <div class="item">
+                <div class="logo">
+                    <a href="./home.html"><img src="../fe/image/logo.png" alt=""></a>
+                </div>
+            </div>
+            <div class="item">
+                <a href="">TRANG CHỦ</a>
+            </div>
+            <div class="item">
+                <a href="">GIỚI THIỆU</a>
+            </div>
+            <div class="item">
+                <a href="">THỦ TỤC</a>
+            </div>
+            <div class="item">
+                <a href="">QUY ĐỊNH</a>
+            </div>
+            <div class="item">
+                <a href="">HỖ TRỢ</a>
+            </div>
+            <div class="item">
+                <a href="">THÔNG TIN</a>
+            </div>
+            <div class="item">
+                <a href="">TIN TỨC</a>
+            </div>
+            <div class="item">
+                <a href="">LIÊN HỆ</a>
+            </div>
+            <div class="item seach">
+               <input type="text">
+            </div>
+            <div class="item user" id="user_show">
+                <a href="">ĐĂNG NHẬP</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="nav">
+        <div class="menu">
+            <div class="item">Tổng quan</div>
+            <div class="item"><a href="./danhsachvanban.html">Văn bản mới</a></div>
+            <div class="item"><a href="./thontintaikhoan_tk.html">Thông tin cá nhân</a></div>
+            <div class="item"><a href="./thontintaikhoan_cslt.html">Quản lý cơ sở lưu trú</a></div>
+            <div class="item"><a href="./dangkykhachtamtru.html">Đăng ký khách tạm trú</a></div>
+            
+            <div class="item"><a href="./guiyeucauhotro.html">Gửi yêu cầu hỗ trợ</a></div>
+            <div class="item"><a href="#" id="logout">Đăng Xuất</a></div>
+            <!-- <div class="item">Quản lý khai báo</div> -->
+        </div>
+
+        
+        <div class="main grid">
+            <div class="container grid wide updateuser"  id="list_tb">
+                <!-- <div class="item_tb" >
+                        <a href="">vi phạm</a>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="footer grid">
+        <div class="container gridfoot" >
+            <div class="logo">
+                <img src="./image/logo.png" alt="">
+            </div>
+            <div class="info">
+                <h3>BẢN QUYỀN CỦA ỦY BAN NHÂN DÂN THÀNH PHỐ ĐÀ NẴNG</h3>
+                <p><b>Giấy phép:</b> 612/GP-STTTT cấp ngày 21 tháng 10 năm 2016.</p>
+                <p><b>Trưởng Ban biên tập:</b> Trần Chí Cường, Phó Chủ tịch UBND thành phố.</p>
+                <p><b>Trụ sở:</b> 24 Trần Phú, P.Thạch Thang, Q. Hải Châu, TP. Đà Nẵng.</p>
+                <p><b>Điện thoại:</b> (+84.236) 3.817.366 </p>
+                <p><b>Email:</b> toasoan@danang.gov.vn</p>
+
+            </div>
+        </div>
+    </div>
+    <script src="../fe/js/user.js"></script>
+    <script>
+        function bindvalue(){
+            $.ajax({
+                type: "get",
+                url: "http://localhost:8080/api/accommodation/all",
+                headers:{"Authorization": 'Bearer '+token },
+                
+                success:async function(data) {
+                    let listcs = data.content
+                    for(i=0;i<listcs.length;i++){
+                        await getvipham(listcs[i].id)
+                    }
+                   
+                },error:function(message){
+                    console.log(message)
+                    alert(message?.responseJSON?.message||"có lỗi sảy ra")
+                    window.location.href = "./dangnhap.html"
+                }
+            })
+        }
+        bindvalue()
+
+
+        var list_tb = document.getElementById("list_tb")
+
+        async function getvipham(index){
+            return new Promise((resolve) => {
+                $.ajax({
+                    type: "get",
+                    url: "http://localhost:8080/api/notification/"+index+"/all",
+                    headers:{"Authorization": 'Bearer '+token },
+                    
+                    success:async function(data) {
+                       let list_data = data.content
+                       for(let i=0;i<list_data.length;i++){
+                        console.log(list_data[i])
+                        list_tb.innerHTML +=`<div class="item_tb" >
+                                            <a href="./vipham.html?${list_data[i].id}">${list_data[i].tieuDe}</a>
+                                    </div>`
+                       }
+                       
+                        resolve()
+                    },error:function(message){
+                        console.log(message)
+                        alert(message?.responseJSON?.message||"có lỗi sảy ra")
+                        window.location.href = "./dangnhap.html"
+                    }
+                })
+            })
+        }
+    </script>
+    <script>
+        const logout = document.getElementById("logout")
+        logout.onclick = function(){
+            localStorage.setItem("accessToken","")
+            localStorage.setItem("email","")
+            localStorage.setItem("id","")
+            localStorage.setItem("refreshToken","")
+            location.href ="http://127.0.0.1:5501/v_user/dangnhap.html"
+        }
+    </script>
+</body>
+</html>

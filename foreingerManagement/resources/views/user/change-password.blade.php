@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../fe/css/header-footer.css">
     <link rel="stylesheet" href="../fe/css/update.css">
     <link rel="stylesheet" href="../fe/css/quanlytaikhoan.css">
+    <link rel="stylesheet" href="../fe/css/registry.css">
     <link rel="stylesheet" href="../fe/css/menu.css">
     <style>
         .updateuser{
@@ -41,7 +42,7 @@
             </div>
         </div>
         <div class="item">
-            <a href="">TRANG ADMIN</a>
+            <a href="">TRANG CHỦ</a>
         </div>
         <div class="item">
             <a href="">GIỚI THIỆU</a>
@@ -68,38 +69,68 @@
             <input type="text">
         </div>
         <div class="item user" id="user_show">
-            <a href="{{ route('admin.home') }}">Xin chào {{ Auth::user()->hoVaTen }}</a>
+            <a href="{{ route('user.home') }}">Xin chào {{ Auth::user()->hoVaTen }}</a>
         </div>
     </div>
 </div>
 
-
-
-
-
-
-
-
-
 <div class="nav">
     <div class="menu">
         <div class="item">Tổng quan</div>
-        <div class="item"><a href="./danhsachvanban.html">1</a></div>
-        <div class="item"><a href="./thontintaikhoan_tk.html">2</a></div>
-        <div class="item"><a href="./doimatkhau.html">3</a></div>
-        <div class="item"><a href="./thontintaikhoan_cslt.html">4</a></div>
-        <div class="item"><a href="./dangkykhachtamtru.html">5</a></div>
-        <div class="item"><a href="./guiyeucauhotro.html">6</a></div>
+        <div class="item"><a href="./danhsachvanban.html">Văn bản mới</a></div>
+        <div class="item"><a href="./thontintaikhoan_tk.html">Thông tin cá nhân</a></div>
+        <div class="item"><a href="{{ route('password.change') }}">Đổi mật khẩu</a></div>
+        <div class="item"><a href="./thontintaikhoan_cslt.html">Quản lý cơ sở lưu trú</a></div>
+        <div class="item"><a href="./dangkykhachtamtru.html">Đăng ký khách tạm trú</a></div>
+        <div class="item"><a href="./guiyeucauhotro.html">Gửi yêu cầu hỗ trợ</a></div>
         <div class="item"><a href="#" id="logout" style="color: red">Đăng Xuất</a></div>
         <!-- <div class="item">Quản lý khai báo</div> -->
     </div>
 
 
     <div class="main grid">
-        <div class="container grid wide updateuser"  id="list_tb">
-            <!-- <div class="item_tb" >
-                    <a href="">vi phạm</a>
-            </div> -->
+        <div class="container registry login">
+            <h3>Đổi Mật Khẩu</h3>
+            <div class="boxwide">
+                @if (session('success'))
+                <div style="color: green; margin-bottom: 10px;">{{ session('success') }}</div>
+                @endif
+
+                @if ($errors->any())
+                <div style="color: red; margin-bottom: 10px;">
+                    {{ $errors->first() }}
+                </div>
+                @endif
+
+                <form method="POST" action="{{ route('password.update') }}">
+                    @csrf
+                    <div class="box">
+                        <div class="col">
+                            <div class="item">
+                                <p>Mật Khẩu Hiện Tại:</p>
+                                <div class="daybox pass">
+                                    <input type="password" name="current_password" required>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <p>Mật Khẩu Mới:</p>
+                                <div class="daybox pass">
+                                    <input type="password" name="new_password" required>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <p>Nhập Lại Mật Khẩu Mới:</p>
+                                <div class="daybox pass">
+                                    <input type="password" name="new_password_confirmation" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="regis">
+                        <button type="submit">Đổi Mật Khẩu</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

@@ -26,7 +26,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(Request $request)
     {
-        // Kiểm tra xem các trường có bị bỏ trống không
+        // Xác thực đầu vào
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -36,18 +36,38 @@ class AuthenticatedSessionController extends Controller
             'password.required' => 'Vui lòng nhập mật khẩu.',
         ]);
 
-        // Kiểm tra thông tin đăng nhập
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('dashboard'); // Chuyển hướng sau khi đăng nhập thành công
+        // Lấy thông tin người dùng
+        $user = Auth::getProvider()->retrieveByCredentials($credentials);
+
+        // Nếu không tìm thấy người dùng hoặc mật khẩu không đúng
+        if (!$user || !Auth::getProvider()->validateCredentials($user, $credentials)) {
+            throw ValidationException::withMessages([
+                'email' => 'Tài khoản hoặc mật khẩu không đúng.',
+            ]);
         }
 
-        // Xử lý khi đăng nhập sai
-        throw ValidationException::withMessages([
-            'email' => 'Tài khoản hoặc mật khẩu không đúng.',
-        ]);
+        // Kiểm tra trạng thái tài khoản
+        if ($user->trangThai !== 'active') {
+            throw ValidationException::withMessages([
+                'email' => 'Tài khoản của bạn chưa được kích hoạt hoặc đã bị khóa.',
+            ]);
+        }
+
+        // Đăng nhập người dùng
+        Auth::login($user);
+        $request->session()->regenerate();
+
+        // Chuyển hướng dựa trên vai trò
+        if ($user->idVaiTro === 1) {
+            return redirect()->route('user.home');
+        } elseif ($user->idVaiTro === 2) {
+            return redirect()->route('admin.home');
+        }
+
+        // Mặc định chuyển đến dashboard nếu không xác định được vai trò
+        return redirect()->intended('dashboard');
     }
 
     /**
@@ -61,6 +81,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        // Chuyển hướng về trang đăng nhập
+        return redirect()->route('login');
     }
 }

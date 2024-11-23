@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../fe/css/grid.css">
+    <link rel="stylesheet" href="../fe/css/header-footer.css">
+    <link rel="stylesheet" href="../fe/css/registry.css">
+    <script src="../fe/js/jquery.js"></script>
+</head>
+<body>
+    <div class="header grid">
+        <div class="container gridhead wide">
+            <div class="item">
+                <div class="logo">
+                    <a href="./home.html"><img src="../fe/image/logo.png" alt=""></a>
+                </div>
+            </div>
+            <div class="item">
+                <a href="">TRANG CHỦ</a>
+            </div>
+            <div class="item">
+                <a href="">GIỚI THIỆU</a>
+            </div>
+            <div class="item">
+                <a href="">THỦ TỤC</a>
+            </div>
+            <div class="item">
+                <a href="">QUY ĐỊNH</a>
+            </div>
+            <div class="item">
+                <a href="">HỖ TRỢ</a>
+            </div>
+            <div class="item">
+                <a href="">THÔNG TIN</a>
+            </div>
+            <div class="item">
+                <a href="">TIN TỨC</a>
+            </div>
+            <div class="item">
+                <a href="">LIÊN HỆ</a>
+            </div>
+            <div class="item seach">
+               <input type="text">
+            </div>
+            <div class="item user"  id="user_show">
+                <a href="">ĐĂNG NHẬP</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="main grid">
+        <div class="router grid wide">
+            <a href="">ĐÔỈ MẬT KHẨU</a>
+        </div>
+        <div class="container registry login">
+            <h3>ĐÔỈ MẬT KHẨU</h3>
+            <div class="boxwide">
+                <div class="box">
+                    <div class="col">
+                        <div class="item">
+                            <p>Mật Khẩu Cũ</p>
+                            <div class="daybox acc">
+                                <input type="password" id="oldpass">
+                            </div>
+                        </div>
+                        <div class="item">
+                            <p>Mật Khẩu Mới(*):</p>
+                            <div class="daybox pass">
+                                <input type="password" id="newpass1">
+                            </div>
+                        </div>
+                        <div class="item">
+                            <p>Xác Nhận Mật Khẩu Mới (*):</p>
+                            <div class="daybox pass">
+                                <input type="password" id="newpass2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              
+                <div class="regis">
+                    <button id="changpass">Đổi mật khẩu</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="footer grid">
+        <div class="container gridfoot" >
+            <div class="logo">
+                <img src="./image/logo.png" alt="">
+            </div>
+            <div class="info">
+                <h3>BẢN QUYỀN CỦA ỦY BAN NHÂN DÂN THÀNH PHỐ ĐÀ NẴNG</h3>
+                <p><b>Giấy phép:</b> 612/GP-STTTT cấp ngày 21 tháng 10 năm 2016.</p>
+                <p><b>Trưởng Ban biên tập:</b> Trần Chí Cường, Phó Chủ tịch UBND thành phố.</p>
+                <p><b>Trụ sở:</b> 24 Trần Phú, P.Thạch Thang, Q. Hải Châu, TP. Đà Nẵng.</p>
+                <p><b>Điện thoại:</b> (+84.236) 3.817.366 </p>
+                <p><b>Email:</b> toasoan@danang.gov.vn</p>
+
+            </div>
+        </div>
+    </div>
+    <script src="../fe/js/user.js"></script>
+    <script>
+        
+        const email = localStorage.getItem("email")
+        const oldpass = document.getElementById("oldpass")
+        const newpass1 = document.getElementById("newpass1")
+        const newpass2 = document.getElementById("newpass2")
+        const changepass = document.getElementById("changpass")
+
+        changepass.onclick = function(){
+            if(!oldpass.value) alert("vui lòng nhập mật khẩu cũ")
+            else if(!newpass1.value || !newpass2.value) alert("vui lòng nhập mật khẩu mới")
+            else if(newpass1.value != newpass2.value) alert("mật khẩu xác nhận không đúng")
+            else if(oldpass.value == newpass1.value) alert("mật khẩu mới không được giống mật khẩu cũ")
+            else{
+                let pass_update = {
+                    "oldPassword": oldpass.value,
+                    "newPassword": newpass1.value
+                }
+                $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/api/auth/password-change",
+                headers:{"Authorization": 'Bearer '+token },
+                data:JSON.stringify(pass_update),
+                contentType:'application/json',
+                success: function(data) {
+                    console.log(data)
+                    alert("cập nhật thành công")
+                    window.location.href = "./thontintaikhoan_tk.html"
+
+                },error:function(message){
+                    console.log(message)
+                    alert(message.responseJSON.message)
+                    // window.location.href = "./dangnhap.html"
+                }
+            })
+            }
+        }
+    </script>
+</body>
+</html>

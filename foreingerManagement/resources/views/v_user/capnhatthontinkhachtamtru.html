@@ -1,0 +1,676 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../fe/css/grid.css">
+    <link rel="stylesheet" href="../fe/css/header-footer.css">
+    <link rel="stylesheet" href="../fe/css/update.css">
+    <script src="../fe/js/jquery.js"></script>
+    <style>
+        .item button{
+            height: 30px;
+            margin: 10px;
+            width: 240px;
+            border-radius: 5px;
+            background-color: #ffb4b4;
+        }
+    </style>
+</head>
+<body>
+    <div class="header grid">
+        <div class="container gridhead wide">
+            <div class="item">
+                <div class="logo">
+                    <a href="./home.html"><img src="../fe/image/logo.png" alt=""></a>
+                </div>
+            </div>
+            <div class="item">
+                <a href="">TRANG CHỦ</a>
+            </div>
+            <div class="item">
+                <a href="">GIỚI THIỆU</a>
+            </div>
+            <div class="item">
+                <a href="">THỦ TỤC</a>
+            </div>
+            <div class="item">
+                <a href="">QUY ĐỊNH</a>
+            </div>
+            <div class="item">
+                <a href="">HỖ TRỢ</a>
+            </div>
+            <div class="item">
+                <a href="">THÔNG TIN</a>
+            </div>
+            <div class="item">
+                <a href="">TIN TỨC</a>
+            </div>
+            <div class="item">
+                <a href="">LIÊN HỆ</a>
+            </div>
+            <div class="item seach">
+               <input type="text">
+            </div>
+            <div class="item user" id="user_show">
+                <a href="">ĐĂNG NHẬP</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="main grid">
+        <div class="router grid wide">
+            <a href="">CẬP NHẬT THÔNG TIN KHÁCH TẠM TRÚ</a>
+        </div>
+        <div class="container grid wide updateuser">
+            <div class="item">
+                <p>Cơ sở lưu trú:</p>
+                <select name="" id="list_cslt">
+                    <option value="0"></option>`
+                </select>
+            </div>
+            <div class="box boxwide" style="border-bottom: 2px solid black;">
+                <div class="item" style="display: flex;">
+                    <label style="place-content: center; margin: 0px 10px;" for="">Tên</label> <input style="width: 35px;" type="checkbox" id="seach_pp"> 
+                    <label style="place-content: center; margin: 0px 10px;" for="">passport</label> <input style="width: 35px;" type="checkbox" id="seach_name">
+                </div>
+                <div class="item">
+                    <b>Thông tin:</b>
+                    <input type="text" id="seach_user_pp"> <button onclick="seachuser_pp()">seach</button>
+                </div>
+  
+            </div>
+
+            <div class="box boxwide">
+                <div class="item">
+                    <b>Họ và tên:</b>
+                   <input type="text" id="k_name"> 
+                </div>
+                <div class="item">
+                    <b>Ngày sinh:</b>
+                   <input type="date"  id="k_birth"> 
+                </div>
+                <div class="item">
+                    <b>Ngày đến:</b>
+                   <input type="date" id="k_datein"> 
+                </div>
+                <div class="item">
+                    <b>Ngày đi:</b>
+                   <input type="date" id="k_dateout"> 
+                </div>
+                <div class="item">
+                    <b>Passport:</b>
+                   <input type="text" id="k_pp"> 
+                </div>
+                <div class="item">
+                    <b>Quốc tịch:</b>
+                   <input type="text" id="k_qt"> 
+                </div>
+                <div class="item">
+                    <b>Ngày đi dự kiến:</b>
+                   <input type="date" id="dateout" > 
+                </div>
+                <div class="item">
+                    <b>Gmail:</b>
+                   <input type="text" id="k_email"> 
+                </div>
+                <div class="item">
+                    <b>Số điện thoại:</b>
+                   <input type="text"  id="k_phone"> 
+                </div>
+                <div class="item">
+                    <p>ID người nước ngoài:</p>
+                    <input type="text" readonly="readonly"  id="k_id"> 
+                </div>
+                <div class="item">
+                    <p>Tệp đính kèm:</p>
+                    <input type="hidden" id="k_file">
+                    <input type="hidden" id="k_qtid">
+                    <button id="show_k_file">Nhấp xem hoặc tải về</button>
+                </div>
+            </div>
+
+            <div class="action">
+                <!-- <button>Đăng ký mới</button> -->
+                <button id="u_update">Cập nhật</button>
+            </div>
+            <div class="listuser"id="list_kshow">
+                <div class="render">
+                    <h4>Danh sách người nước ngoài tạm trú</h4>
+                    
+                    <button>In danh sách</button>
+                </div>
+                <div class="head table">
+                    <div class="stt">STT</div>
+                    <div class="data">Họ và tên</div>
+                    <div class="data">Ngày sinh</div>
+                    <div class="data">Ngày đến</div>
+                    <div class="data">Ngày đi</div>
+                    <div class="data">Passport</div>
+                    <div class="data">Quốc tịch</div>
+                    <div class="data">Ghi chú</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="footer grid">
+        <div class="container gridfoot" >
+            <div class="logo">
+                <img src="../fe/image/logo.png" alt="">
+            </div>
+            <div class="info">
+                <h3>BẢN QUYỀN CỦA ỦY BAN NHÂN DÂN THÀNH PHỐ ĐÀ NẴNG</h3>
+                <p><b>Giấy phép:</b> 612/GP-STTTT cấp ngày 21 tháng 10 năm 2016.</p>
+                <p><b>Trưởng Ban biên tập:</b> Trần Chí Cường, Phó Chủ tịch UBND thành phố.</p>
+                <p><b>Trụ sở:</b> 24 Trần Phú, P.Thạch Thang, Q. Hải Châu, TP. Đà Nẵng.</p>
+                <p><b>Điện thoại:</b> (+84.236) 3.817.366 </p>
+                <p><b>Email:</b> toasoan@danang.gov.vn</p>
+
+            </div>
+        </div>
+    </div>
+    <script src="../fe/js/user.js"></script>
+
+    <script>
+        const list_cslt = document.getElementById("list_cslt")
+        async function getvalue(){
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                type: "get",
+                url: "http://localhost:8080/api/accommodation/all",
+                headers:{"Authorization": 'Bearer '+token },
+                
+                success: function(data) {
+                    console.log(data)
+                    let listcs = data.content
+                    for(i=0;i<listcs.length;i++){
+                        list_cslt.innerHTML +=  ` <div class="roww table row" onclick="bindvalue('${listcs[i].id}')">
+                            <option value="${listcs[i].id}">${listcs[i].tenCoSo}</option>`
+                    }
+                   resolve()
+
+                },error:function(message){
+                    console.log(message)
+                    alert(message?.responseJSON?.message||"có lỗi sảy ra")
+                    window.location.href = "./dangnhap.html"
+                }
+            })
+            })
+        }
+
+        getvalue()
+
+        list_cslt.addEventListener("change",function(){
+        console.log(this.value)
+        if(this.value!=0){
+            $.ajax({
+                type: "get",
+                url: "http://localhost:8080/api/foreigner/"+this.value+"/all",
+                headers:{"Authorization": 'Bearer '+token },
+                
+                success: function(data) {
+                    console.log(data)
+                    var data_show = data.content
+                    var list_kshow = document.getElementById("list_kshow")
+                    list_kshow.innerHTML = ` <div class="render">
+                    <h4>Danh sách người nước ngoài tạm trú</h4>
+                    <button onclick="k_loc()" style="margin-right: 20px;">lọc</button>
+                    <button>In danh sách</button>
+                </div>
+                <div class="head table">
+                    <div class="stt">STT</div>
+                    <div class="data">Họ và tên</div>
+                    <div class="data">Ngày sinh</div>
+                    <div class="data">Ngày đến</div>
+                    <div class="data">Ngày đi</div>
+                    <div class="data">Passport</div>
+                    <div class="data">Quốc tịch</div>
+                    <div class="data">Ghi chú</div>
+                </div>`
+                 for(let i=0;i<data_show.length;i++){
+                    list_kshow.innerHTML += `  <div class="roww table"  onclick="bindvalue('${data_show[i].idNguoiNuocNgoai}')">
+                    <div class="stt">${i+1}</div>
+                    <div class="data">${data_show[i].hoVaTen}</div>
+                    <div class="data">${data_show[i].ngaySinh}</div>
+                    <div class="data">${data_show[i].ngayDen}</div>
+                    <div class="data">${data_show[i].ngayRoiKhoi}</div>
+                    <div class="data">${data_show[i].soPassport}</div>
+                    <div class="data">${data_show[i].tenQuocTich}</div>
+                    <div class="data">${data_show[i].trangThaiGiayPhep}</div>
+                </div>`
+                 }
+                  
+
+                },error:function(message){
+                    console.log(message)
+                    alert(message?.responseJSON?.message||"có lỗi sảy ra")
+                   
+                }
+        })
+        }
+    })
+
+
+    const seach_pp = document.getElementById("seach_pp")
+        const seach_name = document.getElementById("seach_name")
+
+
+        function seachuser_pp(){
+            var seach_value = document.getElementById("seach_user_pp").value
+
+            if(seach_pp.checked){
+                if(seach_value.length >0){
+                    
+                    let data_f = {
+                        "id": null,
+                        "hoVaTen": seach_value,
+                        "soPassport": null,
+                        "idCoSo": null
+                    }
+                    if(list_cslt.value !='0'){
+                        data_f.idCoSo = list_cslt.value
+                    }
+                    $.ajax({
+                        "url": "http://localhost:8080/api/foreigner/search?pageSize=100",
+                        "method": "POST",
+                        "timeout": 0,
+                        "headers": {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer "+token
+                        },
+                        "data": JSON.stringify(data_f),
+                        contentType:'application/json',
+                        success: function(data) {          
+                           console.log(data)
+                            var list_find = data.content
+                            console.log(list_find)
+                            if(list_find.length ==0){
+                                alert("không có thông tin phù hợp")
+                            }else{
+                                console.log("ok")
+                                var list_kshow = document.getElementById("list_kshow")
+                                list_kshow.innerHTML = ` <div class="render">
+                                    <h4>Danh sách người nước ngoài tạm trú</h4>
+                               
+                                    <button>In danh sách</button>
+                                </div>
+                                <div class="head table">
+                                    <div class="stt">STT</div>
+                                    <div class="data">Họ và tên</div>
+                                    <div class="data">Ngày sinh</div>
+                                    <div class="data">Ngày đến</div>
+                                    <div class="data">Ngày đi</div>
+                                    <div class="data">Passport</div>
+                                    <div class="data">Quốc tịch</div>
+                                    <div class="data">Ghi chú</div>
+                                </div>`
+                                    for(let i=0;i<list_find.length;i++){
+                                        list_kshow.innerHTML += `  <div class="roww table"  onclick="bindvalue('${list_find[i].idNguoiNuocNgoai}')">
+                                        <div class="stt">${i+1}</div>
+                                        <div class="data">${list_find[i].hoVaTen}</div>
+                                        <div class="data">${list_find[i].ngaySinh}</div>
+                                        <div class="data">${list_find[i].ngayDen}</div>
+                                        <div class="data">${list_find[i].ngayRoiKhoi}</div>
+                                        <div class="data">${list_find[i].soPassport}</div>
+                                        <div class="data">${list_find[i].tenQuocTich}</div>
+                                        <div class="data">${list_find[i].trangThaiGiayPhep}</div>
+                                    </div>`
+                                    }
+                                }
+                        //    window.location.reload()
+                        },error:function(message){
+                            // console.log(message)
+                            alert(message?.responseJSON?.message||"có lỗi sảy ra")
+                        
+                        }
+                    })
+                }
+                else alert("vui lòng nhập dữ liệu cần tìm")
+            }else{
+                if(seach_value >0){
+                    let data_f = {
+                        "id": null,
+                        "hoVaTen": null,
+                        "soPassport": seach_value,
+                        "idCoSo": null
+                    }
+                    if(list_cslt.value !='0'){
+                        data_f.idCoSo = list_cslt.value
+                    }
+                    $.ajax({
+                        "url": "http://localhost:8080/api/foreigner/search?pageSize=100",
+                        "method": "POST",
+                        "timeout": 0,
+                        "headers": {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer "+token
+                        },
+                        "data": JSON.stringify(data_f),
+                        contentType:'application/json',
+                        success: function(data) {          
+                           console.log(data)
+                            var list_find = data.content
+                            console.log(list_find)
+                            if(list_find.length ==0){
+                                alert("không có thông tin phù hợp")
+                            }else{
+                                console.log("ok")
+                                var list_kshow = document.getElementById("list_kshow")
+                                list_kshow.innerHTML = ` <div class="render">
+                                    <h4>Danh sách người nước ngoài tạm trú</h4>
+                                  
+                                    <button>In danh sách</button>
+                                </div>
+                                <div class="head table">
+                                    <div class="stt">STT</div>
+                                    <div class="data">Họ và tên</div>
+                                    <div class="data">Ngày sinh</div>
+                                    <div class="data">Ngày đến</div>
+                                    <div class="data">Ngày đi</div>
+                                    <div class="data">Passport</div>
+                                    <div class="data">Quốc tịch</div>
+                                    <div class="data">Ghi chú</div>
+                                </div>`
+                                    for(let i=0;i<list_find.length;i++){
+                                        list_kshow.innerHTML += `  <div class="roww table"  onclick="bindvalue('${list_find[i].idNguoiNuocNgoai}')">
+                                        <div class="stt">${i+1}</div>
+                                        <div class="data">${list_find[i].hoVaTen}</div>
+                                        <div class="data">${list_find[i].ngaySinh}</div>
+                                        <div class="data">${list_find[i].ngayDen}</div>
+                                        <div class="data">${list_find[i].ngayRoiKhoi}</div>
+                                        <div class="data">${list_find[i].soPassport}</div>
+                                        <div class="data">${list_find[i].tenQuocTich}</div>
+                                        <div class="data">${list_find[i].trangThaiGiayPhep}</div>
+                                    </div>`
+                                    }
+                                }
+                        //    window.location.reload()
+                        },error:function(message){
+                            // console.log(message)
+                            alert(message?.responseJSON?.message||"có lỗi sảy ra")
+                        
+                        }
+                    })
+                }
+                else alert("vui lòng nhập dữ liệu cần tìm")
+            }
+            
+        }
+
+
+
+        seach_name.onclick = function(){
+            if(seach_name.checked){
+                seach_pp .checked = false
+            }
+        }
+
+        seach_pp.onclick = function(){
+            if(seach_pp.checked){
+                seach_name .checked = false
+            }
+        }
+
+
+        
+    const u_update = document.getElementById("u_update")
+
+    const k_name = document.getElementById("k_name") 
+
+    const k_birth = document.getElementById("k_birth") 
+
+    const k_datein = document.getElementById("k_datein") 
+    const k_file = document.getElementById("k_file") 
+    const k_dateout = document.getElementById("k_dateout") 
+        
+    const k_pp = document.getElementById("k_pp") 
+       
+    const k_qt = document.getElementById("k_qt") 
+    const k_email  = document.getElementById("k_email") 
+    const k_phone  = document.getElementById("k_phone") 
+    const k_id  = document.getElementById("k_id") 
+    const k_qtid = document.getElementById("k_qtid")
+    const datepp = document.getElementById("dateout") 
+    const show_k_file = document.getElementById("show_k_file") 
+    // function bindvalue(index){
+    //         $.ajax({
+    //             type: "get",
+    //             url: "http://localhost:8080/api/foreigner/details/"+index,
+    //             headers:{"Authorization": 'Bearer '+token },
+                
+    //             success: function(data) {
+    //                 console.log(data)
+    //                 k_name.value =data.hoVaTen
+    //                 k_birth.value =data.ngaySinh
+    //                 // k_datein.value=data.
+    //                 // k_dateout.value=data.
+    //                 // datepp.value=data.
+    //                 k_email.value  = data.email
+    //                 k_phone.value  = data.sdt
+    //                 k_id.value = data.id
+    //                 k_pp.value =data.soPassport
+    //                 k_qt.value=data.tenQuocTich
+    //             },error:function(message){
+    //                 console.log(message)
+    //                 alert(message.responseJSON.message)
+                  
+    //             }
+    //         })
+    //     }
+   function bindvalue(index){
+        $.ajax({
+            type: "get",
+            url: "http://localhost:8080/api/foreigner/"+list_cslt.value+"/all",
+            headers:{"Authorization": 'Bearer '+token },
+            
+            success: function(data) {
+                var listscan = data.content
+                for(i=0;i<listscan.length;i++){
+                    if(index==listscan[i].idNguoiNuocNgoai){
+                        if(listscan[i].ngayRoiKhoi){
+                            listscan[i].ngayRoiKhoi = listscan[i].ngayRoiKhoi.slice(0,10)
+                        }else{
+                            listscan[i].ngayRoiKhoi = ''
+                        }
+                        console.log(listscan[i])
+                        k_name.value =listscan[i].hoVaTen
+                        k_birth.value =listscan[i].ngaySinh
+                        k_datein.value=listscan[i].ngayDen.slice(0,10)
+                        k_dateout.value = listscan[i].ngayRoiKhoi
+                        datepp.value = listscan[i].ngayDiDuKien.slice(0,10)
+                        k_email.value  = listscan[i].email
+                        k_phone.value  = listscan[i].sdt
+                        k_id.value = listscan[i].idNguoiNuocNgoai
+                        k_pp.value =listscan[i].soPassport
+                        k_qt.value=listscan[i].tenQuocTich
+                        k_file.value = listscan[i].tepDinhKemMoiNhat
+                        show_k_file.innerHTML = listscan[i].tepDinhKemMoiNhat
+                        k_qtid.value = listscan[i].idQuocTich
+                        // if(listscan[i].trangThaiGiayPhep=="Đã duyệt"){
+                        //     u_update.style.display  = 'none'
+                        // }else{
+                        //     u_update.style.display  = 'block'
+                        // }
+
+                    }
+                }
+            
+            
+
+            },error:function(message){
+                console.log(message)
+                alert(message?.responseJSON?.message||"có lỗi sảy ra")
+            
+            }
+        })
+    }
+
+    show_k_file.onclick = function(){
+        
+        console.log(k_file.value)
+        $.ajax({
+            type: "get",
+            url: "http://localhost:8080/api/foreigner/"+list_cslt.value+"/"+k_id.value+"/file/"+k_file.value,
+            headers:{"Authorization": 'Bearer '+token },
+            
+            success: function(data) {          
+                console.log(data)
+                window.open(data)
+            },error:function(message){
+                console.log(message)
+                alert(message?.responseJSON?.message||"có lỗi sảy ra")
+            
+            }
+        })
+    }
+
+
+    u_update.onclick=function(){
+        let result = confirm( `Bạn muốn cập nhật thông tin?` );
+
+    if ( result ) {
+        var x_dateout = ""
+        if(k_dateout.value){
+            x_dateout = k_dateout.value + " 00:00"
+        }
+        
+        var formData = new FormData()
+
+                let requestData = {
+                        "idNguoiNuocNgoai":k_id.value,
+                        "hoVaTen":k_name.value,
+                        "soPassport":k_pp.value,
+                        "sdt": k_phone.value,
+                        "email": k_email.value,
+                        "ngaySinh": k_birth.value,
+                        "ngayDen":k_datein.value+" 00:00",
+                        "ngayDiDuKien":datepp.value+" 00:00",
+                        "lyDoTamTru": "test",
+                        "quocTichId": k_qtid.value,
+                        "idCoSo":list_cslt.value,
+                        "ngayRoiKhoi": x_dateout
+                };
+                console.log(requestData)
+
+                formData.append("nguoiNuocNgoaiUpdateRequest", new Blob([JSON.stringify(requestData)], { type: "application/json" }));
+                
+                var settings = {
+                    "url": "http://localhost:8080/api/foreigner",
+                    "method": "PUT",
+                    "timeout": 0,
+                    "headers": {
+                        "Authorization": "Bearer "+token
+                    },
+                    "processData": false,
+                    "mimeType": "multipart/form-data",
+                    "contentType": false,
+                    "data": formData
+                };
+                // $.ajax(settings).done(function (response) {
+                //     console.log(response);
+                //     alert("Thêm thành công")
+                //     // window.location.reload()
+                // });
+                $.ajax({
+                    "url": "http://localhost:8080/api/foreigner",
+                    "method": "PUT",
+                    "timeout": 0,
+                    "headers": {
+                        "Authorization": "Bearer "+token
+                    },
+                    "processData": false,
+                    "mimeType": "multipart/form-data",
+                    "contentType": false,
+                    "data": formData,
+                    contentType:'application/json',
+                    success: function(data) {          
+                        // console.log(data)
+                       alert("Cập nhật thành công")
+                    //    window.location.reload()
+                    },error:function(message){
+                        // console.log(message)
+                        alert(message?.responseJSON?.message||"có lỗi sảy ra")
+                    
+                    }
+                })
+
+            } 
+    }
+
+
+    function k_loc(){
+           
+        $.ajax({
+                type: "get",
+                url: "http://localhost:8080/api/foreigner/"+list_cslt.value+"/all",
+                headers:{"Authorization": 'Bearer '+token },
+                
+                success: function(data) {
+                    console.log(data)
+                    var data_show = data.content
+                    var list_kshow = document.getElementById("list_kshow")
+                    list_kshow.innerHTML = ` <div class="render">
+                    <h4>Danh sách người nước ngoài tạm trú</h4>
+                    <button onclick="k_loc()" style="margin-right: 20px;">lọc</button>
+                    <button>In danh sách</button>
+                </div>
+                <div class="head table">
+                    <div class="stt">STT</div>
+                    <div class="data">Họ và tên</div>
+                    <div class="data">Ngày sinh</div>
+                    <div class="data">Ngày đến</div>
+                    <div class="data">Ngày đi</div>
+                    <div class="data">Passport</div>
+                    <div class="data">Quốc tịch</div>
+                    <div class="data">Ghi chú</div>
+                </div>`
+                 for(let i=0;i<data_show.length;i++){
+                    if(data_show[i].trangThaiGiayPhep =="Đã duyệt"){
+                        list_kshow.innerHTML += `  <div class="roww table"  onclick="bindvalue('${data_show[i].idNguoiNuocNgoai}')">
+                        <div class="stt">${i+1}</div>
+                        <div class="data">${data_show[i].hoVaTen}</div>
+                        <div class="data">${data_show[i].ngaySinh}</div>
+                        <div class="data">${data_show[i].ngayDen}</div>
+                        <div class="data">${data_show[i].ngayRoiKhoi}</div>
+                        <div class="data">${data_show[i].soPassport}</div>
+                        <div class="data">${data_show[i].tenQuocTich}</div>
+                        <div class="data">${data_show[i].trangThaiGiayPhep}</div>
+                    </div>`
+                    }
+                  
+                 }
+                  
+
+                },error:function(message){
+                    console.log(message)
+                    alert(message?.responseJSON?.message||"có lỗi sảy ra")
+                   
+                }
+            })
+        
+       }
+
+    </script>
+
+</body>
+</html>
