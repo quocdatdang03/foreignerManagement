@@ -34,6 +34,7 @@ class NguoiNuocNgoaiRequest extends FormRequest
             'idQuocTich' => 'required|exists:quoc_tichs,idQuocTich',
             'idCoSo' => 'required|exists:co_so_luu_trus,idCoSo',
             'ngayDuKienRoiKhoi' => 'required|date|after_or_equal:ngayDen',
+            'tepDinhKem' => 'nullable|file|mimes:jpg,png|max:2048',
         ];
     }
 
@@ -56,6 +57,8 @@ class NguoiNuocNgoaiRequest extends FormRequest
             'ngayDuKienRoiKhoi.required' => 'Ngày dự kiến rời khỏi không được để trống.',
             'ngayDuKienRoiKhoi.date' => 'Ngày dự kiến rời khỏi phải là định dạng ngày.',
             'ngayDuKienRoiKhoi.after_or_equal' => 'Ngày dự kiến rời khỏi phải sau hoặc bằng ngày đến.',
+            'tepDinhKem.mimes' => 'Tệp đính kèm phải là định dạng jpg hoặc png.',
+            'tepDinhKem.max' => 'Dung lượng tệp đính kèm không được vượt quá 2MB.',
         ];
     }
 

@@ -58,6 +58,7 @@ class NguoiNuocNgoaiService
         $giayPhep->lyDoDen = $data['lyDoDen'];
         $giayPhep->ngayDuKienRoiKhoi = $data['ngayDuKienRoiKhoi'];
         $giayPhep->trangThai = "Đang xử lý";
+        $giayPhep->tepDinhKem = $data['tepDinhKem'];
          $giayPhep->created_at = Carbon::now(); 
         $giayPhep->save();
 

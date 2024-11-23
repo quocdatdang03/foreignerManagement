@@ -13,6 +13,15 @@
         .invalid-feedback {
             display: block;
         }
+
+        #imagePreview {
+            margin-top: 20px;
+        }
+
+        #imagePreview img {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 <body>
@@ -32,7 +41,7 @@
         @endif --}}
 
         <!-- Form to update Giấy phép -->
-        <form action="{{ route('giaypheps.update', $giayPhep->idGiayPhep) }}" method="POST">
+        <form action="{{ route('giaypheps.update', $giayPhep->idGiayPhep) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -139,7 +148,21 @@
                     @enderror
                 </div>
 
-                {{-- Trạng thái --}}
+                <div class="mb-3">
+                    <label for="tepDinhKem" class="form-label">Tệp định kèm</label>
+                    <input type="file" class="form-control @error('tepDinhKem') is-invalid @enderror" id="tepDinhKem" name="tepDinhKem" onchange="handleShowImage(event)">
+                    @error('tepDinhKem')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Image Preview -->
+                <div id="imagePreview" class="mb-3" style="display: {{ $giayPhep->tepDinhKem ? 'block' : 'none' }};">
+                    <label class="form-label">Ảnh đã tải lên:</label>
+                    <img id="previewImage" src="{{ $giayPhep->tepDinhKem }}" alt="Image preview">
+                </div>
+
+                 {{-- Trạng thái --}}
                 <div>
                     <p class="d-flex align-items-center gap-1">
                        <span>Trạng thái: </span>
@@ -167,5 +190,18 @@
 
 <!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function handleShowImage(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var preview = document.getElementById('previewImage');
+            var imagePreviewDiv = document.getElementById('imagePreview');
+            preview.src = reader.result;
+            imagePreviewDiv.style.display = 'block'; // Hiển thị ảnh
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
 </body>
 </html

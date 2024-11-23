@@ -7,6 +7,7 @@ use App\Models\QuocTich;
 use App\Services\NguoiNuocNgoaiService;
 use App\Http\Requests\NguoiNuocNgoaiRequest;
 use App\Models\NguoiNuocNgoai;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 
 class NguoiNuocNgoaiController extends Controller
@@ -43,11 +44,29 @@ class NguoiNuocNgoaiController extends Controller
     // Xử lý form đăng ký và lưu dữ liệu vào cả 2 bảng
     public function store(NguoiNuocNgoaiRequest $request)
     {
+        $data = $request->validated();
+
+        if ($request->hasFile('tepDinhKem')) {
+            $file = $request->file('tepDinhKem');
+
+            // Upload file lên Cloudinary
+            $uploadedFile = Cloudinary::upload($file->getRealPath(), [
+                'folder' => 'giay_phep'
+            ]);
+
+            //dd($uploadedFile->getSecurePath());
+
+            // Lấy URL của tệp đã upload từ đối tượng trả về
+            $data['tepDinhKem'] = $uploadedFile->getSecurePath();
+        }
+
         // Gọi service để xử lý đăng ký và lưu dữ liệu
-        $this->nguoiNuocNgoaiService->registerNguoiNuocNgoai($request->validated());
+        $this->nguoiNuocNgoaiService->registerNguoiNuocNgoai($data);
 
         return redirect()->route('nguoinuocngoais.create')->with('success', 'Đăng ký thành công');
     }
+
+
 
         public function edit($id)
     {

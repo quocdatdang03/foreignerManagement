@@ -9,6 +9,7 @@ use App\Models\CoSoLuuTru;
 use App\Models\GiayPhep;
 use App\Models\QuocTich;
 use App\Services\GiayPhepService;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -89,13 +90,51 @@ class GiayPhepController extends Controller
 
 
 
+    // public function update(NguoiNuocNgoaiRequest $request, $id)
+    // {
+       
+    //     // dd($validated);
+    //    $updatedGiayPhep = $this->giayPhepService->updateGiayPhep($id, $request->validated());
+    //     return redirect()->route('giaypheps.index')->with('success', 'Cập nhật giấy phép thành công!');
+    // }
+
     public function update(NguoiNuocNgoaiRequest $request, $id)
     {
-       
-        // dd($validated);
-       $updatedGiayPhep = $this->giayPhepService->updateGiayPhep($id, $request->validated());
+        // Validate the input
+        $data = $request->validated();
+
+        $giayPhep = GiayPhep::findOrFail($id); 
+
+        // Check if a new file is uploaded
+        if ($request->hasFile('tepDinhKem')) {
+            $file = $request->file('tepDinhKem');
+
+            // Upload the new file to Cloudinary
+            $uploadedFile = Cloudinary::upload($file->getRealPath(), [
+                'folder' => 'giay_phep'
+            ]);
+
+            // Get the secure URL of the uploaded file
+            $data['tepDinhKem'] = $uploadedFile->getSecurePath();
+
+            // Optionally, delete the old file from Cloudinary if it exists
+            if ($giayPhep->tepDinhKem) {
+                $oldFilePath = parse_url($giayPhep->tepDinhKem, PHP_URL_PATH);  // Extract the file path from URL
+                $publicId = basename($oldFilePath); // Get the public ID of the file
+                Cloudinary::destroy($publicId); // Delete the old file from Cloudinary
+            }
+        } else {
+            // If no new file is uploaded, keep the old file URL
+            $data['tepDinhKem'] = $giayPhep->tepDinhKem;
+        }
+
+        // Call the service to update the data
+        $this->giayPhepService->updateGiayPhep($id, $data);
+
+        // Redirect back with success message
         return redirect()->route('giaypheps.index')->with('success', 'Cập nhật giấy phép thành công!');
     }
+
 
     public function destroy($id)
     {
