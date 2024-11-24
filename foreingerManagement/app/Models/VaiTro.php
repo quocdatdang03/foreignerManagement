@@ -11,14 +11,11 @@ class VaiTro extends Model
 
     protected $table = 'vai_tros';
     protected $primaryKey = 'idVaiTro';
-    public $timestamps = false;
 
-    protected $fillable = [
-        'tenVaiTro',
-    ];
+    protected $fillable = ['tenVaiTro'];
 
-     public function nguoiDungs()
+    public function nguoiDungs()
     {
-        return $this->hasMany(NguoiDung::class, 'idVaiTro');
+        return $this->hasMany(NguoiDung::class, 'idVaiTro', 'idVaiTro');
     }
 }
