@@ -61,9 +61,9 @@ class AuthenticatedSessionController extends Controller
 
         // Chuyển hướng dựa trên vai trò
         if ($user->idVaiTro === 1) {
-            return redirect()->route('user.home');
+            return redirect()->route('user.home')->with('user', $user);
         } elseif ($user->idVaiTro === 2) {
-            return redirect()->route('admin.home');
+            return redirect()->route('admin.home')->with('user', $user);
         }
 
         // Mặc định chuyển đến dashboard nếu không xác định được vai trò

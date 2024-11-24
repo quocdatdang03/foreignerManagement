@@ -67,6 +67,11 @@
     </div>
 </div>
 <script>
+    @if(session('user'))
+        const user = @json(session('user'));
+        localStorage.setItem('currentUser', JSON.stringify(user));
+    @endif
+
     document.getElementById('logout').addEventListener('click', function (event) {
         event.preventDefault(); // Ngăn không chuyển hướng
         const form = document.createElement('form'); // Tạo một form ẩn

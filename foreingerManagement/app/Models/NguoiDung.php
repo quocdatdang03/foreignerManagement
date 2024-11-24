@@ -45,4 +45,19 @@ class NguoiDung extends Authenticatable implements CanResetPassword
         // Sử dụng Mail để gửi email đặt lại mật khẩu
         Mail::to($this->email)->send(new ResetPasswordMail($token));
     }
+
+    public function vaiTro()
+    {
+        return $this->belongsTo(VaiTro::class, 'idVaiTro');
+    }
+
+    public function thongBaos()
+    {
+        return $this->hasMany(ThongBao::class, 'idNguoiDung');
+    }
+
+    public function coSoLuuTrus()
+    {
+        return $this->hasMany(CoSoLuuTru::class, 'idNguoiDung');
+    }
 }

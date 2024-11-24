@@ -36,8 +36,12 @@
                 <button type="submit" style="padding: 5px;">Tìm</button>
             </form>
         </div>
-        <div class="item user" id="user_show">
-            <a href="{{ route('user.home') }}">Xin chào {{ Auth::user()->hoVaTen }}</a>
+        <div class="item user">
+            @auth
+                <a href="{{ route('user.home') }}">Xin chào {{ Auth::user()->hoVaTen }}</a>
+            @else
+                <a href="{{ route('login') }}">ĐĂNG NHẬP</a>
+            @endauth
         </div>
     </div>
 </div>

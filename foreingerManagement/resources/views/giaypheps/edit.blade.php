@@ -149,7 +149,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="tepDinhKem" class="form-label">Tệp định kèm</label>
+                    <label for="tepDinhKem" class="form-label">Ảnh passport</label>
                     <input type="file" class="form-control @error('tepDinhKem') is-invalid @enderror" id="tepDinhKem" name="tepDinhKem" onchange="handleShowImage(event)">
                     @error('tepDinhKem')
                         <div class="invalid-feedback">{{ $message }}</div>
