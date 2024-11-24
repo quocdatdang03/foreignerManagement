@@ -233,10 +233,10 @@ body {
   width: 100%;
   cursor: pointer;
   transition: background 0.1s;
+  border-top: 1px solid black;
 }
-.m-list-active span,
-.m-list-active p {
-  color: #fff !important;
+.messenger-list-item:hover {
+  background-color: #ffffff;
 }
 
 .m-list-active,
@@ -256,19 +256,20 @@ body {
 }
 .messenger-list-item tr > td:first-child {
   padding-right: 0;
-  width: 55px;
+  width: 30px;
 }
 .messenger-list-item td p {
   margin-bottom: 4px;
-  font-size: 14px;
+  font-size: 10px;
+  color: #000;
 }
 .messenger-list-item td p span {
   float: right;
 }
 .messenger-list-item td span {
-  color: #cacaca;
+  color: #000;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 8px;
 }
 .messenger-list-item td b {
   float: right;
@@ -498,6 +499,7 @@ body {
   border-radius: 20px;
   word-break: break-word;
   display: table-cell;
+  background-color: #ffffff;
 }
 .message-card .message-time {
   display: inline-block;
@@ -515,11 +517,11 @@ body {
 }
 .message-card.mc-sender .message {
   direction: ltr;
-  color: #fff !important;
-  background: var(--primary-color) !important;
+  color: #000 !important;
+  background: #d7f7ef !important;
 }
 .message-card.mc-sender .message .message-time {
-  color: rgba(255, 255, 255, 0.67);
+  color: #000;
 }
 
 .mc-error .message {

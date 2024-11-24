@@ -29,45 +29,18 @@
           </div>
       </div>
   </div>
-  {{-- ---------------------- Settings Modal ---------------------- --}}
-  <div class="app-modal" data-name="settings">
-      <div class="app-modal-container">
-          <div class="app-modal-card" data-name="settings" data-modal='0'>
-              <form id="update-settings" action="{{ route('avatar.update') }}" enctype="multipart/form-data" method="POST">
-                  @csrf
-                  {{-- <div class="app-modal-header">Update your profile settings</div> --}}
-                  <div class="app-modal-body">
-                      {{-- Udate profile avatar --}}
-                      <div class="avatar av-l upload-avatar-preview chatify-d-flex"
-                      style="background-image: url('{{ Chatify::getUserWithAvatar(Auth::user())->avatar }}');"
-                      ></div>
-                      <p class="upload-avatar-details"></p>
-                      <label class="app-btn a-btn-primary update" style="background-color:{{$messengerColor}}">
-                          Tải lên
-                          <input class="upload-avatar chatify-d-none" accept="image/*" name="avatar" type="file" />
-                      </label>
-                      {{-- Dark/Light Mode  --}}
-                      <p class="divider"></p>
-                      <p class="app-modal-header">Chế độ tối <span class="
-                        {{ Auth::user()->dark_mode > 0 ? 'fas' : 'far' }} fa-moon dark-mode-switch"
-                         data-mode="{{ Auth::user()->dark_mode > 0 ? 1 : 0 }}"></span></p>
-                      {{-- change messenger color  --}}
-                      <p class="divider"></p>
-                      {{-- <p class="app-modal-header">Change {{ config('chatify.name') }} Color</p> --}}
-                      <div class="update-messengerColor">
-                      @foreach (config('chatify.colors') as $color)
-                        <span style="background-color: {{ $color}}" data-color="{{$color}}" class="color-btn"></span>
-                        @if (($loop->index + 1) % 5 == 0)
-                            <br/>
-                        @endif
-                      @endforeach
-                      </div>
-                  </div>
-                  <div class="app-modal-footer">
-                      <a href="javascript:void(0)" class="app-btn cancel">Hủy</a>
-                      <input type="submit" class="app-btn a-btn-success update" value="Lưu thay đổi" />
-                  </div>
-              </form>
-          </div>
-      </div>
-  </div>
+
+<style>
+    .app-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 10000;
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+</style>

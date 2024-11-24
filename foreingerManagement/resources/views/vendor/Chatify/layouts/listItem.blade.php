@@ -1,21 +1,3 @@
-{{-- -------------------- Saved Messages -------------------- --}}
-@if($get == 'saved')
-    <table class="messenger-list-item" data-contact="{{ Auth::user()->id }}">
-        <tr data-action="0">
-            {{-- Avatar side --}}
-            <td>
-            <div class="saved-messages avatar av-m">
-                <span class="far fa-bookmark"></span>
-            </div>
-            </td>
-            {{-- center side --}}
-            <td>
-                <p data-id="{{ Auth::user()->id }}" data-type="user">Tin nhắn đã lưu</p>
-            </td>
-        </tr>
-    </table>
-@endif
-
 {{-- -------------------- Contact list -------------------- --}}
 @if($get == 'users' && !!$lastMessage)
 <?php
@@ -29,7 +11,7 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
             @if($user->active_status)
                 <span class="activeStatus"></span>
             @endif
-            <div class="avatar av-m" style="background-image: url('{{ $user->avatar }}');"></div>
+            <div class="avatar av-m" style="background-image: url('{{ $user->avatar }}'); width: 25px; height: 25px;"></div>
         </td>
         {{-- center side --}}
         <td>
@@ -80,10 +62,3 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
     </tr>
 </table>
 @endif
-
-{{-- -------------------- Shared photos Item -------------------- --}}
-@if($get == 'sharedPhoto')
-<div class="shared-photo chat-image" style="background-image: url('{{ $image }}')"></div>
-@endif
-
-

@@ -76,5 +76,8 @@
             @yield('content')
         </main>
     </div>
+    @auth
+        @include('vendor.Chatify.pages.app')
+    @endauth
 </body>
 </html>
