@@ -11,46 +11,7 @@
     <script src="../fe/js/jquery.js"></script>
 </head>
 <body>
-<div class="header grid">
-    <div class="container gridhead wide">
-        <div class="item">
-            <div class="logo">
-                <a href="./home.html"><img src="../fe/image/logo.png" alt=""></a>
-            </div>
-        </div>
-        <div class="item">
-            <a href="">TRANG CHỦ</a>
-        </div>
-        <div class="item">
-            <a href="">GIỚI THIỆU</a>
-        </div>
-        <div class="item">
-            <a href="">THỦ TỤC</a>
-        </div>
-        <div class="item">
-            <a href="">QUY ĐỊNH</a>
-        </div>
-        <div class="item">
-            <a href="">HỖ TRỢ</a>
-        </div>
-        <div class="item">
-            <a href="">THÔNG TIN</a>
-        </div>
-        <div class="item">
-            <a href="">TIN TỨC</a>
-        </div>
-        <div class="item">
-            <a href="">LIÊN HỆ</a>
-        </div>
-        <div class="item seach">
-            <input type="text">
-        </div>
-        <div class="item user">
-            <a href="{{ route('login') }}">ĐĂNG NHẬP</a>
-        </div>
-    </div>
-</div>
-
+<x-user-header-grid />
 <div class="main grid">
     <div class="router grid wide">
         <a href="">ĐĂNG KÝ</a>
