@@ -2,18 +2,16 @@
 
 namespace App\Models;
 
-use App\Mail\ResetPasswordMail;
-use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Database\Eloquent\Model;
 
-class NguoiDung extends Authenticatable implements CanResetPassword
+class NguoiDung extends Model
 {
     use HasFactory;
 
     protected $table = 'nguoi_dungs';
     protected $primaryKey = 'idNguoiDung';
+    public $timestamps = false;
 
     protected $fillable = [
         'idVaiTro',
@@ -23,26 +21,20 @@ class NguoiDung extends Authenticatable implements CanResetPassword
         'hoVaTen',
         'soCCCD',
         'trangThai',
-        'google_id',
     ];
 
-    protected $hidden = [
-        'matKhau',
-        'remember_token',
-    ];
-
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
-    public function getAuthPassword()
+     public function vaiTro()
     {
-        return $this->matKhau; // Laravel sử dụng trường "matKhau"
+        return $this->belongsTo(VaiTro::class, 'idVaiTro');
     }
 
-    public function sendPasswordResetNotification($token)
+    public function thongBaos()
     {
-        // Sử dụng Mail để gửi email đặt lại mật khẩu
-        Mail::to($this->email)->send(new ResetPasswordMail($token));
+        return $this->hasMany(ThongBao::class, 'idNguoiDung');
+    }
+
+    public function coSoLuuTrus()
+    {
+        return $this->hasMany(CoSoLuuTru::class, 'idNguoiDung');
     }
 }
