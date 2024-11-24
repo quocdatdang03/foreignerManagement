@@ -56,3 +56,15 @@ Route::post('/search-accommodation', [SearchCoSoLuuTruController::class, 'search
 Route::get('auth/google', [GoogleAuthController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('auth/google/callback', [GoogleAuthController::class, 'handleGoogleCallback']);
 require __DIR__.'/auth.php';
+
+Route::get('/giaypheps', [GiayPhepController::class, 'index'])->name('giaypheps.index');
+Route::get('/giaypheps/edit/{giayphep}', [GiayPhepController::class, 'edit'])->name('giaypheps.edit');
+Route::put('/giaypheps/{giayphep}', [GiayPhepController::class, 'update'])->name('giaypheps.update');
+Route::delete('/giaypheps/{giayphep}', [GiayPhepController::class, 'destroy'])->name('giaypheps.destroy');
+
+// for NhanVienQuanLy
+Route::get('/giaypheps/xet_duyet', [GiayPhepController::class, 'index_xetduyet'])->name('giaypheps.index.xet_duyet');
+Route::get('/giaypheps/xet_duyet/edit/{giayphep}', [GiayPhepController::class, 'edit_xetduyet'])->name('giaypheps.edit.xet_duyet');
+Route::put('/giaypheps/approve/{giayphep}', [GiayPhepController::class, 'approve'])->name('giaypheps.approve');
+Route::put('/giaypheps/reject/{giayphep}', [GiayPhepController::class, 'reject'])->name('giaypheps.reject');
+
