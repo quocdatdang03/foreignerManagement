@@ -38,10 +38,20 @@
         </div>
         <div class="item user">
             @auth
-                <a href="{{ route('user.home') }}">Xin chào {{ Auth::user()->hoVaTen }}</a>
+                @if(Auth::user()->idVaiTro == 2)
+                    <a href="{{ route('admin.home') }}">Xin chào {{ Auth::user()->hoVaTen }}</a>
+                @else
+                    <a href="{{ route('user.home') }}">Xin chào {{ Auth::user()->hoVaTen }}</a>
+                @endif
             @else
                 <a href="{{ route('login') }}">ĐĂNG NHẬP</a>
             @endauth
         </div>
     </div>
 </div>
+
+<style>
+    * {
+        font-family: Arial, sans-serif;
+    }
+</style>

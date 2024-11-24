@@ -9,6 +9,7 @@ use App\Http\Requests\NguoiNuocNgoaiRequest;
 use App\Models\NguoiNuocNgoai;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NguoiNuocNgoaiController extends Controller
 {
@@ -36,7 +37,9 @@ class NguoiNuocNgoaiController extends Controller
     // Hiển thị form đăng ký
     public function create()
     {
-        $cosos = CoSoLuuTru::all();
+        $idNguoiDung = Auth::id(); 
+        
+        $cosos = CoSoLuuTru::where('idNguoiDung', $idNguoiDung)->get();
         $quoctichs = QuocTich::all();
         return view('nguoinuocngoais.create', compact('cosos', 'quoctichs'));
     }

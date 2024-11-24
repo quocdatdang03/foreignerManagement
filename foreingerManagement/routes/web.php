@@ -12,7 +12,7 @@ use App\Http\Controllers\GiayPhepController;
 use App\Http\Controllers\NguoiNuocNgoaiController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('user.userhome');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -23,11 +23,12 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/nguoinuocngoais/{nguoinuocngoai}', [NguoiNuocNgoaiController::class, 'update'])->name('nguoinuocngoais.update');
 });
 
-
-Route::get('/giaypheps', [GiayPhepController::class, 'index'])->name('giaypheps.index');
-Route::get('/giaypheps/edit/{giayphep}', [GiayPhepController::class, 'edit'])->name('giaypheps.edit');
-Route::put('/giaypheps/{giayphep}', [GiayPhepController::class, 'update'])->name('giaypheps.update');
-Route::delete('/giaypheps/{giayphep}', [GiayPhepController::class, 'destroy'])->name('giaypheps.destroy');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/giaypheps', [GiayPhepController::class, 'index'])->name('giaypheps.index')->middleware('role:2');
+    Route::get('/giaypheps/edit/{giayphep}', [GiayPhepController::class, 'edit'])->name('giaypheps.edit');
+    Route::put('/giaypheps/{giayphep}', [GiayPhepController::class, 'update'])->name('giaypheps.update');
+    Route::delete('/giaypheps/{giayphep}', [GiayPhepController::class, 'destroy'])->name('giaypheps.destroy');
+});
 
 // for NhanVienQuanLy
 Route::middleware(['auth'])->group(function () {

@@ -33,56 +33,44 @@
     </style>
 </head>
 <body>
-<x-user-header-grid />
+    <x-user-header-grid />
 
-<div class="nav">
-    <x-user-menu />
-    <div class="main grid">
-        <div class="container grid wide updateuser"  id="list_tb">
-            <div class="item_tb" >
-                    <a href="">Trang người dùng</a>
+    <div class="nav">
+        @auth
+            <x-user-menu />
+        @endauth
+
+        <div class="main grid">
+            <div class="container grid wide updateuser"  id="list_tb">
+                <div class="item_tb" >
+                        <a href="">Trang người dùng</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
+    <div class="footer grid">
+        <div class="container gridfoot" >
+            <div class="logo">
+                <img src="./image/logo.png" alt="">
+            </div>
+            <div class="info">
+                <h3>BẢN QUYỀN CỦA ỦY BAN NHÂN DÂN THÀNH PHỐ ĐÀ NẴNG</h3>
+                <p><b>Giấy phép:</b> 612/GP-STTTT cấp ngày 21 tháng 10 năm 2016.</p>
+                <p><b>Trưởng Ban biên tập:</b> Trần Chí Cường, Phó Chủ tịch UBND thành phố.</p>
+                <p><b>Trụ sở:</b> 24 Trần Phú, P.Thạch Thang, Q. Hải Châu, TP. Đà Nẵng.</p>
+                <p><b>Điện thoại:</b> (+84.236) 3.817.366 </p>
+                <p><b>Email:</b> toasoan@danang.gov.vn</p>
 
-
-
-
-<div class="footer grid">
-    <div class="container gridfoot" >
-        <div class="logo">
-            <img src="./image/logo.png" alt="">
-        </div>
-        <div class="info">
-            <h3>BẢN QUYỀN CỦA ỦY BAN NHÂN DÂN THÀNH PHỐ ĐÀ NẴNG</h3>
-            <p><b>Giấy phép:</b> 612/GP-STTTT cấp ngày 21 tháng 10 năm 2016.</p>
-            <p><b>Trưởng Ban biên tập:</b> Trần Chí Cường, Phó Chủ tịch UBND thành phố.</p>
-            <p><b>Trụ sở:</b> 24 Trần Phú, P.Thạch Thang, Q. Hải Châu, TP. Đà Nẵng.</p>
-            <p><b>Điện thoại:</b> (+84.236) 3.817.366 </p>
-            <p><b>Email:</b> toasoan@danang.gov.vn</p>
-
+            </div>
         </div>
     </div>
-</div>
-<script>
-    @if(session('user'))
-        const user = @json(session('user'));
-        localStorage.setItem('currentUser', JSON.stringify(user));
-    @endif
 
-    document.getElementById('logout').addEventListener('click', function (event) {
-        event.preventDefault(); // Ngăn không chuyển hướng
-        const form = document.createElement('form'); // Tạo một form ẩn
-        form.method = 'POST';
-        form.action = "{{ route('logout') }}"; // Route đăng xuất Laravel
-        form.innerHTML = `
-            @csrf
-        `;
-        document.body.appendChild(form); // Thêm form vào body
-        form.submit(); // Gửi form
-    });
-</script>
+    <script>
+        @if(session('user'))
+            const user = @json(session('user'));
+            localStorage.setItem('currentUser', JSON.stringify(user));
+        @endif
+    </script>
 </body>
 </html>

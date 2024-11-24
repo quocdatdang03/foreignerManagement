@@ -4,14 +4,21 @@ namespace App\Services;
 
 use App\Models\GiayPhep;
 use App\Models\NguoiNuocNgoai;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class GiayPhepService
 {
    public function getAllGiayPheps($filters = [])
     {
+        // Lấy idNguoiDung của người dùng hiện tại
+        $idNguoiDung = Auth::id();
+
         $query = GiayPhep::query()
-            ->with(['nguoiNuocNgoai', 'coSo']);
+            ->with(['nguoiNuocNgoai', 'coSo'])
+            ->whereHas('coSo', function ($query) use ($idNguoiDung) {
+                $query->where('idNguoiDung', $idNguoiDung);
+            }); // Lọc theo idNguoiDung thông qua quan hệ 'coSo'
 
         // filter by keyword
         if (isset($filters['keyword']) && $filters['keyword']) {
@@ -28,7 +35,6 @@ class GiayPhepService
             }
         }
 
-
         // filter by coSo
         if (isset($filters['idCoSo']) && $filters['idCoSo']) {
             $query->where('idCoSo', $filters['idCoSo']);
@@ -42,7 +48,7 @@ class GiayPhepService
         }
 
         // Phân trang
-        return $query->paginate(3);  // Phân trang 3 mục mỗi trang
+        return $query->paginate(10);  // Phân trang 10 mục mỗi trang
     }
 
     public function getGiayPhepById($id)

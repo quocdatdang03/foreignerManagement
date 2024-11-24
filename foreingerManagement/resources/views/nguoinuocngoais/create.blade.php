@@ -34,11 +34,15 @@
 </head>
 <body>
     <x-user-header-grid />
+
     <div class="nav">
-        <x-user-menu />
+        @if(Auth::user()->idVaiTro == 2)
+            <x-admin-menu />
+        @elseif(Auth::user()->idVaiTro == 1)
+            <x-user-menu />
+        @endif
 
         <div class="main mt-5 w-75">
-
             <div class="mx-auto" style="max-width: 500px;">
                 <h2 class="mb-4">Đăng ký khách tạm trú</h2>
     

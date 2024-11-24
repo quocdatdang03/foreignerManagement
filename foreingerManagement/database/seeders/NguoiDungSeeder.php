@@ -36,6 +36,28 @@ class NguoiDungSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'idVaiTro' => 1, // user
+                'email' => 'manhdao1006@gmail.com',
+                'matKhau' => Hash::make('matkhau123'),
+                'hoVaTen' => 'Đào Đức Mạnh',
+                'sdt' => '0779569834',
+                'soCCCD' => '43210987654322',
+                'trangThai' => 'active',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'idVaiTro' => 1, // user
+                'email' => 'dat03122003@gmail.com',
+                'matKhau' => Hash::make('password456'),
+                'hoVaTen' => 'Another User',
+                'sdt' => '0911223344',
+                'soCCCD' => '56789012345678',
+                'trangThai' => 'active',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }
