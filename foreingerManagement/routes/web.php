@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\GoogleAuthController;
+use App\Http\Controllers\GiayPhepController;
+use App\Http\Controllers\NguoiNuocNgoaiController;
 
 Route::get('/', function () {
     return view('welcome');

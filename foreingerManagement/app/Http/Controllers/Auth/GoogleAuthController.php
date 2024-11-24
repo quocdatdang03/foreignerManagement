@@ -36,7 +36,7 @@ class GoogleAuthController extends Controller
                     'email' => $googleUser->getEmail(),
                     'google_id' => $googleUser->getId(),
                     'matKhau' => bcrypt($randomPassword), // Lưu mật khẩu đã mã hóa
-                    'idVaiTro' => 2, // Vai trò mặc định là user
+                    'idVaiTro' => 1, // Vai trò mặc định là user
                     'trangThai' => 'active', // Trạng thái mặc định
                 ]);
                 // Gửi mật khẩu tới email

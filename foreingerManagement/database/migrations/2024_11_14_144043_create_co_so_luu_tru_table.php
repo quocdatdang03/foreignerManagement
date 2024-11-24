@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('loaiHinh');
             $table->foreign('idNguoiDung')->references('idNguoiDung')->on('nguoi_dungs');
-//            $table->foreign('idPhuongXa')->references('idPhuongXa')->on('phuong_xas');
+            $table->foreign('idPhuongXa')->references('idPhuongXa')->on('phuong_xas');
             $table->timestamps();
         });
     }

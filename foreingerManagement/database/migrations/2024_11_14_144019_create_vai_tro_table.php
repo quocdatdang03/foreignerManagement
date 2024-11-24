@@ -6,15 +6,25 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         Schema::create('vai_tros', function (Blueprint $table) {
             $table->id('idVaiTro');
-            $table->string('tenVaiTro')->unique();
+            $table->string('tenVaiTro');
             $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
         Schema::dropIfExists('vai_tros');
