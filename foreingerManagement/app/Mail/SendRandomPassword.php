@@ -19,7 +19,7 @@ class SendRandomPassword extends Mailable
 
     public function build()
     {
-        return $this->subject('Your Account Password')
+        return $this->subject('Mật khẩu tài khoản của bạn')
             ->view('email.send_password');
     }
 }

@@ -36,7 +36,7 @@ class GoogleAuthController extends Controller
                     'email' => $googleUser->getEmail(),
                     'google_id' => $googleUser->getId(),
                     'matKhau' => bcrypt($randomPassword), // Lưu mật khẩu đã mã hóa
-                    'idVaiTro' => 2, // Vai trò mặc định là user
+                    'idVaiTro' => 1, // Vai trò mặc định là user
                     'trangThai' => 'active', // Trạng thái mặc định
                 ]);
                 // Gửi mật khẩu tới email
@@ -46,7 +46,7 @@ class GoogleAuthController extends Controller
             // Đăng nhập người dùng
             Auth::login($user);
 
-            return redirect('/dashboard');
+            return redirect('/userhome');
         } catch (\Exception $e) {
             return redirect('/login')->withErrors('Đăng nhập bằng Google thất bại.');
         }
