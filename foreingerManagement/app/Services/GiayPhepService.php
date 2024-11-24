@@ -4,22 +4,28 @@ namespace App\Services;
 
 use App\Models\GiayPhep;
 use App\Models\NguoiNuocNgoai;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class GiayPhepService
 {
    public function getAllGiayPheps($filters = [])
     {
+        // Lấy idNguoiDung của người dùng hiện tại
+        $idNguoiDung = Auth::id();
+
         $query = GiayPhep::query()
-            ->with(['nguoiNuocNgoai', 'coSo']);
+            ->with(['nguoiNuocNgoai', 'coSo'])
+            ->whereHas('coSo', function ($query) use ($idNguoiDung) {
+                $query->where('idNguoiDung', $idNguoiDung);
+            }); // Lọc theo idNguoiDung thông qua quan hệ 'coSo'
 
-        // filter by keyword
+        // Filter theo keyword
         if (isset($filters['keyword']) && $filters['keyword']) {
-            $searchTerms = explode(' ', $filters['keyword']);  // Split by space
+            $searchTerms = explode(' ', $filters['keyword']); // Tách từ khóa theo khoảng trắng
 
-            // Loop through each search term and apply it to multiple columns
             foreach ($searchTerms as $term) {
-                $query->where(function($query) use ($term) {
+                $query->where(function ($query) use ($term) {
                     $query->whereHas('nguoiNuocNgoai', function ($query) use ($term) {
                         $query->where('hoTen', 'like', '%' . $term . '%')
                             ->orWhere('soPassport', 'like', '%' . $term . '%');
@@ -28,13 +34,12 @@ class GiayPhepService
             }
         }
 
-
-        // filter by coSo
+        // Filter theo idCoSo
         if (isset($filters['idCoSo']) && $filters['idCoSo']) {
             $query->where('idCoSo', $filters['idCoSo']);
         }
 
-        // filter by quocTich
+        // Filter theo idQuocTich
         if (isset($filters['idQuocTich']) && $filters['idQuocTich']) {
             $query->whereHas('nguoiNuocNgoai', function ($query) use ($filters) {
                 $query->where('idQuocTich', $filters['idQuocTich']);
@@ -42,7 +47,7 @@ class GiayPhepService
         }
 
         // Phân trang
-        return $query->paginate(3);  // Phân trang 3 mục mỗi trang
+        return $query->paginate(3); // Trả về 3 mục mỗi trang
     }
 
     public function getGiayPhepById($id)

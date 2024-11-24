@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
             NguoiDungSeeder::class,
             CoSoLuuTruSeeder::class,
             QuocTichSeeder::class,
+            NguoiNuocNgoaiSeeder::class,
+            GiayPhepSeeder::class
         ]);
     }
 }

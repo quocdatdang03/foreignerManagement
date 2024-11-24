@@ -11,6 +11,7 @@ use App\Models\QuocTich;
 use App\Services\GiayPhepService;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class GiayPhepController extends Controller
@@ -22,16 +23,24 @@ class GiayPhepController extends Controller
         $this->giayPhepService = $giayPhepService;
     }
 
-    public function index(Request $request)
+   public function index(Request $request)
     {
-        // Lấy các bộ lọc từ query parameters
+        // Lấy idNguoiDung của người dùng đang đăng nhập
+        $idNguoiDung = Auth::id(); // Hoặc Auth::user()->idNguoiDung
+
+        // Nhận các tham số từ request
         $filters = $request->only(['keyword', 'idQuocTich', 'idCoSo']);
-        $giayPheps = $this->giayPhepService->getAllGiayPheps($filters);
 
+        // Lọc danh sách cơ sở lưu trú theo idNguoiDung (nếu cần)
+        $coSos = CoSoLuuTru::where('idNguoiDung', $idNguoiDung)->get();
 
-        $coSos = CoSoLuuTru::all();
+        // Lấy danh sách quốc tịch
         $quocTichs = QuocTich::all();
 
+        // Lấy danh sách giấy phép với các bộ lọc
+        $giayPheps = $this->giayPhepService->getAllGiayPheps($filters);
+
+        // Trả về view với các dữ liệu cần thiết
         return view('giaypheps.index', compact('giayPheps', 'coSos', 'quocTichs'));
     }
 
@@ -58,18 +67,19 @@ class GiayPhepController extends Controller
 
     public function edit($id)
     {
-            // Retrieve all CoSoLuuTru and QuocTichs for dropdown options
-            $coSos = CoSoLuuTru::all();
-            $quocTichs = QuocTich::all();
+        $idNguoiDung = Auth::id(); 
+        
+        $coSos = CoSoLuuTru::where('idNguoiDung', $idNguoiDung)->get();
+        $quocTichs = QuocTich::all();
 
-            // Retrieve the GiayPhep with relationships to NguoiNuocNgoai and CoSoLuuTru
-            $giayPhep = GiayPhep::with(['nguoiNuocNgoai', 'coSo'])->find($id);
+        // Retrieve the GiayPhep with relationships to NguoiNuocNgoai and CoSoLuuTru
+        $giayPhep = GiayPhep::with(['nguoiNuocNgoai', 'coSo'])->find($id);
 
-            // dd($giayPhep->ngayDen, $giayPhep->nguoiNuocNgoai->idQuocTich, $giayPhep->idCoSo, $giayPhep->ngayDuKienRoiKhoi);
+        // dd($giayPhep->ngayDen, $giayPhep->nguoiNuocNgoai->idQuocTich, $giayPhep->idCoSo, $giayPhep->ngayDuKienRoiKhoi);
 
 
-            // Return the edit view with GiayPhep, QuocTichs, and CoSos
-            return view('giaypheps.edit', compact('giayPhep', 'quocTichs', 'coSos'));
+        // Return the edit view with GiayPhep, QuocTichs, and CoSos
+        return view('giaypheps.edit', compact('giayPhep', 'quocTichs', 'coSos'));
     }
 
     public function edit_xetduyet($id)

@@ -34,7 +34,7 @@ class CoSoLuuTruSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'idNguoiDung' => 2,
+                'idNguoiDung' => 3,
                 'tenCoSo' => 'Nhà Nghỉ Hoa Hồng',
                 'diaChiCoSo' => '99 Lê Duẩn, Hải Châu, Đà Nẵng',
                 'sdt' => '0123459876',
