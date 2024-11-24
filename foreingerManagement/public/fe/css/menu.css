@@ -1,0 +1,9 @@
+.nav .menu .item a{
+    text-decoration: none;
+    color: blue;
+}
+
+
+.nav .menu .item a:hover{
+    color: red;
+}
