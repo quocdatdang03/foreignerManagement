@@ -113,7 +113,6 @@
 
         <script>
             function clearSearch() {
-                // Điều hướng lại trang mà không có tham số 'search' trong URL
                 window.location.href = "{{ route('cosoluutrus.index') }}";
             }
         </script>

@@ -18,9 +18,6 @@ class CoSoLuuTruSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('co_so_luu_trus')->truncate();
-
-        //
         CoSoLuuTru::factory(20)->create([
 
                 'idNguoiDung' => function () {

@@ -17,8 +17,6 @@ class QuanHuyenSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('quan_huyens')->truncate();
-        //
         QuanHuyen::factory(50)->create([
             'idTinhThanh' => function () {
         return TinhThanh::inRandomOrder()->first()->idTinhThanh; // Chọn ngẫu nhiên một VaiTro đã có

@@ -20,7 +20,7 @@ class QuanHuyenFactory extends Factory
     public function definition()
     {
         return [
-            'idTinhThanh' => TinhThanh::factory(),  // Sử dụng factory của TinhThanh để tạo khóa ngoại
+            'idTinhThanh' => TinhThanh::factory(),
             'tenQuanHuyen' => $this->faker->word,
         ];
     }

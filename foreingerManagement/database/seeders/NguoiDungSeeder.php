@@ -17,8 +17,7 @@ class NguoiDungSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('nguoi_dungs')->truncate();
-        //
+
         NguoiDung::factory(100)->create([
             'idVaiTro' => function () {
         return VaiTro::inRandomOrder()->first()->idVaiTro; // Chọn ngẫu nhiên một VaiTro đã có

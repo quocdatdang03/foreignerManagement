@@ -16,9 +16,7 @@ class TinhThanhSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('tinh_thanhs')->truncate();
 
-        //
         TinhThanh::factory(10)->create();
 
     }

@@ -120,7 +120,6 @@
                     </div>
                 </div>
 
-                {{--  --}}
                 <div class="mb-3 card">
                     <div class="card-header">
                         Số cơ sở theo loại hình

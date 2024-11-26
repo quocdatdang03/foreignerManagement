@@ -16,8 +16,7 @@ class VaiTroSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('vai_tros')->truncate();
-        //
+
         VaiTro::factory()->create(['tenVaiTro' => 'Admin']);
         VaiTro::factory()->create(['tenVaiTro' => 'User']);
         VaiTro::factory()->create(['tenVaiTro' => 'Manager']);

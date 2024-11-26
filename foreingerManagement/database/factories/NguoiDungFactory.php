@@ -26,8 +26,8 @@ class NguoiDungFactory extends Factory
             'sdt' => $this->faker->numerify('0#########'),
             'matKhau' => bcrypt('password'),
             'hoVaTen' => $this->faker->name,
-'soCCCD' => $this->faker->numerify('##############'), // Đảm bảo là 14 ký tự
-            'trangThai' => $this->faker->randomElement(['active', 'inactive']), // Chọn ngẫu nhiên "active" hoặc "inactive"
+            'soCCCD' => $this->faker->numerify('##############'),
+            'trangThai' => $this->faker->randomElement(['active', 'inactive']),
         ];
     }
 }

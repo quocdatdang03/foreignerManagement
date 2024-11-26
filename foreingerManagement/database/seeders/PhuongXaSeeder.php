@@ -17,9 +17,7 @@ class PhuongXaSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('phuong_xas')->truncate();
 
-        //
         PhuongXa::factory(100)->create([
             'idQuanHuyen' => function () {
         return QuanHuyen::inRandomOrder()->first()->idQuanHuyen; // Chọn ngẫu nhiên một VaiTro đã có

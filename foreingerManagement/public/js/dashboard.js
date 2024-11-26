@@ -39,18 +39,18 @@ function drawLoaiHinhChart(loaiHinhData) {
 
 function drawPieChart(chartId, quocTichData) {
     var labels = quocTichData.map(function (item) {
-        return item.tenQuocTich; // Quốc tịch
+        return item.tenQuocTich;
     });
 
     var data = quocTichData.map(function (item) {
-        return item.soLuong; // Số lượng người nước ngoài
+        return item.soLuong;
     });
 
     var ctx = document.getElementById(chartId).getContext("2d");
     new Chart(ctx, {
-        type: "doughnut", // Biểu đồ tròn
+        type: "doughnut",
         data: {
-            labels: labels, // Các quốc tịch
+            labels: labels,
             datasets: [
                 {
                     label: "Tỷ lệ quốc tịch",
@@ -136,11 +136,9 @@ function renderLineChart(canvasId, labels, data, chartLabel) {
 
 let giayPhepChart;
 
-// Hàm khởi tạo biểu đồ
 function initializeGiayPhepChart(initialYear) {
     fetchGiayPhepData(initialYear);
 
-    // Gắn sự kiện thay đổi năm
     const yearSelect = document.getElementById("year");
     yearSelect.addEventListener("change", function () {
         const selectedYear = this.value;
@@ -148,7 +146,6 @@ function initializeGiayPhepChart(initialYear) {
     });
 }
 
-// Hàm fetch dữ liệu từ server
 function fetchGiayPhepData(year) {
     fetch(`/giayphep/chart/data?year=${year}`)
         .then((response) => response.json())
@@ -156,7 +153,6 @@ function fetchGiayPhepData(year) {
         .catch((error) => console.error("Error fetching data:", error));
 }
 
-// Hàm cập nhật biểu đồ
 function updateGiayPhepChart(data) {
     if (giayPhepChart) {
         giayPhepChart.destroy();
