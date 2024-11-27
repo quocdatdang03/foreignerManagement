@@ -14,6 +14,7 @@ class NguoiDung extends Authenticatable implements CanResetPassword
 
     protected $table = 'nguoi_dungs';
     protected $primaryKey = 'idNguoiDung';
+    public $timestamps = false;
 
     protected $fillable = [
         'idVaiTro',

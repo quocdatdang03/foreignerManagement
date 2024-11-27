@@ -2,6 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\CoSoLuuTru;
+use App\Models\NguoiDung;
+use App\Models\PhuongXa;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 

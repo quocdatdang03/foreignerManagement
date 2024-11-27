@@ -4,13 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CoSoLuuTru extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'co_so_luu_trus';
     protected $primaryKey = 'idCoSo';
+    public $timestamps = false;
+
     protected $fillable = [
         'idNguoiDung',
         'idPhuongXa',
