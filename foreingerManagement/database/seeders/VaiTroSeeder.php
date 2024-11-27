@@ -11,14 +11,12 @@ class VaiTroSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-
-        VaiTro::factory()->create(['tenVaiTro' => 'Admin']);
-        VaiTro::factory()->create(['tenVaiTro' => 'User']);
-        VaiTro::factory()->create(['tenVaiTro' => 'Manager']);
+        DB::table('vai_tros')->insert([
+            ['tenVaiTro' => 'user', 'created_at' => now(), 'updated_at' => now()],
+            ['tenVaiTro' => 'admin', 'created_at' => now(), 'updated_at' => now()],
+        ]);
     }
 }

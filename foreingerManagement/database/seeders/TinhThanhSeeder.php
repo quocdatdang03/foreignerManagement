@@ -11,13 +11,13 @@ class TinhThanhSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-
-        TinhThanh::factory(10)->create();
-
+        DB::table('tinh_thanhs')->insert([
+            ['tenTinhThanh' => 'Đà Nẵng'],
+            ['tenTinhThanh' => 'Hà Nội'],
+            ['tenTinhThanh' => 'TP. Hồ Chí Minh'],
+        ]);
     }
 }

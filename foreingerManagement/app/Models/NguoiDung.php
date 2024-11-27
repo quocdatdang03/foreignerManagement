@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Mail\ResetPasswordMail;
+use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Mail;
 
-class NguoiDung extends Model
+class NguoiDung extends Authenticatable implements CanResetPassword
 {
     use HasFactory;
 
@@ -21,9 +24,30 @@ class NguoiDung extends Model
         'hoVaTen',
         'soCCCD',
         'trangThai',
+        'google_id',
     ];
 
-     public function vaiTro()
+    protected $hidden = [
+        'matKhau',
+        'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    public function getAuthPassword()
+    {
+        return $this->matKhau; // Laravel sử dụng trường "matKhau"
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        // Sử dụng Mail để gửi email đặt lại mật khẩu
+        Mail::to($this->email)->send(new ResetPasswordMail($token));
+    }
+
+    public function vaiTro()
     {
         return $this->belongsTo(VaiTro::class, 'idVaiTro');
     }

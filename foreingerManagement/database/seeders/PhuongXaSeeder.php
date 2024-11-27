@@ -12,17 +12,13 @@ class PhuongXaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-
-        PhuongXa::factory(100)->create([
-            'idQuanHuyen' => function () {
-        return QuanHuyen::inRandomOrder()->first()->idQuanHuyen; // Chọn ngẫu nhiên một VaiTro đã có
-    },
+        DB::table('phuong_xas')->insert([
+            ['idQuanHuyen' => 1, 'tenPhuongXa' => 'Phước Ninh'],
+            ['idQuanHuyen' => 1, 'tenPhuongXa' => 'Hòa Thuận Đông'],
+            ['idQuanHuyen' => 2, 'tenPhuongXa' => 'Hòa Phát'],
         ]);
-
     }
 }

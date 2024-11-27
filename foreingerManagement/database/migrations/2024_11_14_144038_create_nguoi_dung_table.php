@@ -17,13 +17,16 @@ return new class extends Migration
             $table->id('idNguoiDung');
             $table->unsignedBigInteger('idVaiTro');
             $table->string('email')->unique();
-            $table->char('sdt', 10)->unique();
+            $table->string('google_id')->unique()->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->char('sdt', 10)->unique()->nullable();
             $table->string('matKhau');
             $table->string('hoVaTen');
-            $table->char('soCCCD', 14)->unique();
-            $table->string('trangThai');
-            $table->foreign('idVaiTro')->references('idVaiTro')->on('vai_tros');
+            $table->char('soCCCD', 14)->unique()->nullable();
+            $table->string('trangThai')->default('active');
             $table->timestamps();
+            $table->rememberToken();
+            $table->foreign('idVaiTro')->references('idVaiTro')->on('vai_tros')->onDelete('cascade');
         });
     }
 

@@ -12,16 +12,13 @@ class QuanHuyenSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        QuanHuyen::factory(50)->create([
-            'idTinhThanh' => function () {
-        return TinhThanh::inRandomOrder()->first()->idTinhThanh; // Chọn ngẫu nhiên một VaiTro đã có
-    },
+        DB::table('quan_huyens')->insert([
+            ['idTinhThanh' => 1, 'tenQuanHuyen' => 'Hải Châu'],
+            ['idTinhThanh' => 1, 'tenQuanHuyen' => 'Cẩm Lệ'],
+            ['idTinhThanh' => 2, 'tenQuanHuyen' => 'Hoàn Kiếm'],
         ]);
-
     }
 }

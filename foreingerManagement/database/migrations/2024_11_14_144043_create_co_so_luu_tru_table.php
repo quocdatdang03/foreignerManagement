@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('co_so_luu_trus', function (Blueprint $table) {
             $table->id('idCoSo');
             $table->unsignedBigInteger('idNguoiDung');
-            $table->unsignedBigInteger('idPhuongXa');
+            $table->unsignedBigInteger('idPhuongXa')->nullable();
             $table->string('tenCoSo');
             $table->string('diaChiCoSo');
-            $table->char('sdt', 10)->unique();
-            $table->string('email')->unique();
+            $table->char('sdt', 10)->nullable();
+            $table->string('email')->nullable();
             $table->string('loaiHinh');
             $table->foreign('idNguoiDung')->references('idNguoiDung')->on('nguoi_dungs');
             $table->foreign('idPhuongXa')->references('idPhuongXa')->on('phuong_xas');

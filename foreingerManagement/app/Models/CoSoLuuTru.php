@@ -24,7 +24,7 @@ class CoSoLuuTru extends Model
         'loaiHinh',
     ];
 
-     public function nguoiDung()
+    public function nguoiDung()
     {
         return $this->belongsTo(NguoiDung::class, 'idNguoiDung');
     }

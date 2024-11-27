@@ -7,28 +7,60 @@ use App\Models\VaiTro;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class NguoiDungSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-
-        NguoiDung::factory(100)->create([
-            'idVaiTro' => function () {
-        return VaiTro::inRandomOrder()->first()->idVaiTro; // Chọn ngẫu nhiên một VaiTro đã có
-    },
-            'sdt' => function() {
-                return \Faker\Factory::create()->numerify('0#########');  // Giới hạn số điện thoại 10 ký tự
-            },
-            'soCCCD' => function() {
-                return \Faker\Factory::create()->numerify('##############');  // Giới hạn số điện thoại 10 ký tự
-            },
+        DB::table('nguoi_dungs')->insert([
+            [
+                'idVaiTro' => 2, // admin
+                'email' => 'admin@gmail.com',
+                'matKhau' => Hash::make('matkhau123'),
+                'hoVaTen' => 'Admin',
+                'sdt' => '0123456789',
+                'soCCCD' => '12345678901234',
+                'trangThai' => 'active',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'idVaiTro' => 1, // user
+                'email' => 'user@gmail.com',
+                'matKhau' => Hash::make('matkhau123'),
+                'hoVaTen' => 'User',
+                'sdt' => '0987654321',
+                'soCCCD' => '43210987654321',
+                'trangThai' => 'active',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'idVaiTro' => 1, // user
+                'email' => 'manhdao1006@gmail.com',
+                'matKhau' => Hash::make('matkhau123'),
+                'hoVaTen' => 'Đào Đức Mạnh',
+                'sdt' => '0779569834',
+                'soCCCD' => '43210987654322',
+                'trangThai' => 'active',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'idVaiTro' => 1, // user
+                'email' => 'dat03122003@gmail.com',
+                'matKhau' => Hash::make('password456'),
+                'hoVaTen' => 'Another User',
+                'sdt' => '0911223344',
+                'soCCCD' => '56789012345678',
+                'trangThai' => 'active',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
-
     }
 }
