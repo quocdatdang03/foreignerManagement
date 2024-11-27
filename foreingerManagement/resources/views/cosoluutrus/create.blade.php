@@ -204,7 +204,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary" style="float: right">Đăng ký</button>
+                <button type="submit" class="btn btn-primary" style="float: right; margin-top: 32px">Đăng ký</button>
             </form>
 
             {{-- @if ($errors->any())
