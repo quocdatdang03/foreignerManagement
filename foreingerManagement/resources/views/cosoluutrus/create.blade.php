@@ -45,7 +45,7 @@
                     <div class="row">
                         <div class="col-12 mb-3">
                             <label for="hoVaTen" class="form-label">Họ và tên</label>
-                            <input type="text" class="form-control @error('hoVaTen') is-invalid @enderror" id="hoVaTen" name="hoVaTen">
+                            <input type="text" class="form-control @error('hoVaTen') is-invalid @enderror" id="hoVaTen" name="hoVaTen" value="{{ old('hoVaTen') }}">
                             @error('hoVaTen')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -53,7 +53,7 @@
 
                         <div class="col-6 mb-3">
                             <label for="emailND" class="form-label">Email</label>
-                            <input type="email" class="form-control @error('emailND') is-invalid @enderror" id="emailND" name="emailND">
+                            <input type="email" class="form-control @error('emailND') is-invalid @enderror" id="emailND" name="emailND" value="{{ old('emailND') }}">
                             @error('emailND')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -61,7 +61,7 @@
 
                         <div class="col-6 mb-3">
                             <label for="sdtND" class="form-label">Số điện thoại</label>
-                            <input type="text" class="form-control @error('sdtND') is-invalid @enderror" id="sdtND" name="sdtND">
+                            <input type="text" class="form-control @error('sdtND') is-invalid @enderror" id="sdtND" name="sdtND" value="{{ old('sdtND') }}">
                             @error('sdtND')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -77,7 +77,7 @@
 
                         <div class="col-12 mb-3">
                             <label for="soCCCD" class="form-label">Số CCCD</label>
-                            <input type="text" class="form-control @error('soCCCD') is-invalid @enderror" id="soCCCD" name="soCCCD">
+                            <input type="text" class="form-control @error('soCCCD') is-invalid @enderror" id="soCCCD" name="soCCCD"  value="{{ old('soCCCD') }}">
                             @error('soCCCD')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -93,13 +93,13 @@
                             <label for="idNguoiDung" class="form-label">Chọn người dùng</label>
                             <input type="text" id="idNguoiDung" name="idNguoiDung" class="form-control" placeholder="Nhập tên người dùng">
 
-                            <input type="hidden" id="idNguoiDungHidden" name="idNguoiDungHidden">
+                            <input type="hidden" id="idNguoiDungHidden" name="idNguoiDungHidden" value="{{ old('idNguoiDungHidden') }}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 mb-3">
                             <label for="tenCoSo" class="form-label">Tên cơ sở</label>
-                            <input type="text" class="form-control @error('tenCoSo') is-invalid @enderror" id="tenCoSo" name="tenCoSo" >
+                            <input type="text" class="form-control @error('tenCoSo') is-invalid @enderror" id="tenCoSo" name="tenCoSo" value="{{ old('tenCoSo') }}">
                             @error('tenCoSo')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -109,7 +109,7 @@
                     <div class="row">
                         <div class="col-12 mb-3">
                             <label for="diaChiCoSo" class="form-label">Địa chỉ</label>
-                            <input type="text" class="form-control @error('sdt') is-invalid @enderror" id="diaChiCoSo" name="diaChiCoSo">
+                            <input type="text" class="form-control @error('diaChiCoSo') is-invalid @enderror" id="diaChiCoSo" name="diaChiCoSo" value="{{ old('diaChiCoSo') }}"
                             @error('diaChiCoSo')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -166,7 +166,7 @@
                     <div class="row">
                         <div class="col-6 mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email">
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}">
                             @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -174,7 +174,7 @@
 
                         <div class="col-6 mb-3">
                             <label for="sdt" class="form-label">Số điện thoại</label>
-                            <input type="text" class="form-control @error('sdt') is-invalid @enderror" id="sdt" name="sdt">
+                            <input type="text" class="form-control @error('sdt') is-invalid @enderror" id="sdt" name="sdt" value="{{ old('sdt') }}">
                             @error('sdt')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -207,7 +207,7 @@
                 <button type="submit" class="btn btn-primary" style="float: right">Đăng ký</button>
             </form>
 
-            @if ($errors->any())
+            {{-- @if ($errors->any())
             <div>
             @foreach ($errors->all() as $error)
                 <p class="text-danger">
@@ -216,7 +216,7 @@
             @endforeach
             </div>
 
-            @endif
+            @endif --}}
         </div>
     </div>
     <script>
