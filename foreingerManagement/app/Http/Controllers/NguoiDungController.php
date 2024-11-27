@@ -14,7 +14,6 @@ class NguoiDungController extends Controller
         $searchTerm = $request->get('term');  // Lấy từ khóa tìm kiếm
 
         $nguoiDungs = NguoiDung::where('hoVaTen', 'LIKE', '%' . $searchTerm . '%')
-            ->limit(10)
             ->get();
 
         return response()->json([

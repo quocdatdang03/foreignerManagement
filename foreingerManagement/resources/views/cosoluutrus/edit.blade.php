@@ -10,14 +10,20 @@
 
     <!-- Custom CSS -->
     <style>
-        label {
-            font-weight:500;
+        .form-label {
+            font-weight: 500;
+            color: #0F78B5;
+        }
+
+        .form-label::after {
+            content: '*';
+            color: red;
         }
     </style>
 </head>
 <body>
     <div class="container mt-5">
-    <div class="mx-auto" style="max-width: 500px;">
+    <div class="mx-auto" style="max-width: 800px;">
         <h2 class="mb-4">Cập nhật Cơ sở lưu trú</h2>
 
         <form action="/cosoluutrus/{{ $cosoluutru->idCoSo }}" method="POST">
@@ -43,7 +49,7 @@
                 <div class="row">
                     <div class="col-12 mb-3">
                         <label for="diaChiCoSo" class="form-label">Địa chỉ</label>
-                        <input type="text" class="form-control @error('sdt') is-invalid @enderror" id="diaChiCoSo" name="diaChiCoSo" value="{{ old('sdt', $cosoluutru->diaChiCoSo) }}">
+                        <input type="text" class="form-control @error('diaChiCoSo') is-invalid @enderror" id="diaChiCoSo" name="diaChiCoSo" value="{{ old('sdt', $cosoluutru->diaChiCoSo) }}">
                         @error('diaChiCoSo')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -115,18 +121,34 @@
                 <div class="row">
                     <div class="col-12 mb-3">
                         <label for="loaiHinh" class="form-label">Loại hình</label>
-                        <input type="text" class="form-control @error('loaiHinh') is-invalid @enderror" id="loaiHinh" name="loaiHinh" value="{{ old('loaiHinh', $cosoluutru->loaiHinh) }}">
+                        <select class="form-control @error('loaiHinh') is-invalid @enderror" id="loaiHinh" name="loaiHinh">
+                            <option value=""></option>
+                            @foreach($loaiHinhs as $loaiHinh)
+                            <option value="{{ $loaiHinh }}" {{ old('loaiHinh', $cosoluutru->loaiHinh) == $loaiHinh ? 'selected' : '' }}>
+                                {{ $loaiHinh }}
+                            </option>
+            @endforeach
+                        </select>
                         @error('loaiHinh')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-
                 </div>
             </div>
 
             <!-- Submit Button -->
             <button type="submit" class="btn btn-primary" style="float: right">Cập nhật</button>
         </form>
+        {{-- @if ($errors->any())
+        <div>
+        @foreach ($errors->all() as $error)
+            <p class="text-danger">
+                {{ $error }}
+            </p>
+        @endforeach
+        </div>
+
+        @endif --}}
     </div>
 </div>
 

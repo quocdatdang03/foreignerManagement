@@ -43,7 +43,7 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>STT</th>
                 <th>Tên cơ sở</th>
                 <th>Chủ cơ sở</th>
                 <th>Địa chỉ</th>
@@ -54,9 +54,10 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($cosoluutrus as $cosoluutru)
+            @foreach ($cosoluutrus as $index => $cosoluutru)
                 <tr>
-                    <td>{{ $cosoluutru->idCoSo}}</td>
+                    {{-- <td>{{ $cosoluutru->idCoSo}}</td> --}}
+                    <td>{{ $cosoluutrus->firstItem() + $index }}</td>
                     <td>{{ $cosoluutru->tenCoSo}}</td>
                     <td>{{ $cosoluutru->nguoiDung->hoVaTen}}</td>
                     <td>
