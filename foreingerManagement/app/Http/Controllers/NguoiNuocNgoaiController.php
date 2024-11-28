@@ -37,9 +37,15 @@ class NguoiNuocNgoaiController extends Controller
     // Hiển thị form đăng ký
     public function create()
     {
-        $idNguoiDung = Auth::id(); 
+        $idNguoiDung = Auth::id();
+
+        if (Auth::user()->idVaiTro == 2) {
+            $cosos = CoSoLuuTru::all();
+        } 
+        if (Auth::user()->idVaiTro == 1) {
+            $cosos = CoSoLuuTru::where('idNguoiDung', $idNguoiDung)->get();
+        }
         
-        $cosos = CoSoLuuTru::where('idNguoiDung', $idNguoiDung)->get();
         $quoctichs = QuocTich::all();
         return view('nguoinuocngoais.create', compact('cosos', 'quoctichs'));
     }

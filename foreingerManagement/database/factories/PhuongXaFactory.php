@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\PhuongXa;
+use App\Models\QuanHuyen;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,8 +20,8 @@ class PhuongXaFactory extends Factory
     public function definition()
     {
         return [
-            'idQuanHuyen' => \App\Models\QuanHuyen::factory(),
-            'tenPhuongXa' => $this->faker->streetName,
+            'idQuanHuyen' => QuanHuyen::factory(),
+            'tenPhuongXa' => $this->faker->name,
         ];
     }
 }

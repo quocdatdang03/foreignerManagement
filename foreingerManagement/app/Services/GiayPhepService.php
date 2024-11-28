@@ -11,14 +11,7 @@ class GiayPhepService
 {
    public function getAllGiayPheps($filters = [])
     {
-        // Lấy idNguoiDung của người dùng hiện tại
-        $idNguoiDung = Auth::id();
-
-        $query = GiayPhep::query()
-            ->with(['nguoiNuocNgoai', 'coSo'])
-            ->whereHas('coSo', function ($query) use ($idNguoiDung) {
-                $query->where('idNguoiDung', $idNguoiDung);
-            }); // Lọc theo idNguoiDung thông qua quan hệ 'coSo'
+        $query = GiayPhep::query()->with(['nguoiNuocNgoai', 'coSo']);
 
         // filter by keyword
         if (isset($filters['keyword']) && $filters['keyword']) {

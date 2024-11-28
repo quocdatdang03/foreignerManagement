@@ -19,7 +19,7 @@ class TinhThanhFactory extends Factory
     public function definition()
     {
         return [
-            'tenTinhThanh' => $this->faker->city,
+            'tenTinhThanh' => 'Đà Nẵng',
         ];
     }
 }

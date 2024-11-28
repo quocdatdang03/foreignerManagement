@@ -31,10 +31,7 @@ class GiayPhepController extends Controller
         // Nhận các tham số từ request
         $filters = $request->only(['keyword', 'idQuocTich', 'idCoSo']);
 
-        // Lọc danh sách cơ sở lưu trú theo idNguoiDung (nếu cần)
-        $coSos = CoSoLuuTru::where('idNguoiDung', $idNguoiDung)->get();
-
-        // Lấy danh sách quốc tịch
+        $coSos = CoSoLuuTru::all();
         $quocTichs = QuocTich::all();
 
         // Lấy danh sách giấy phép với các bộ lọc

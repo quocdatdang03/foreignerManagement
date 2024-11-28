@@ -1,8 +1,9 @@
 <div class="menu">
     <div class="item">Tổng quan</div>
-    <div class="item"><a href="#!">Quản lý cơ sở lưu trú</a></div>
+    <div class="item"><a href="{{ route('cosoluutrus.index') }}">Quản lý cơ sở lưu trú</a></div>
     <div class="item"><a href="{{ route('giaypheps.index') }}">Quản lý giấy phép tạm trú</a></div>
     <div class="item"><a href="/giaypheps/xet_duyet">Xử lý yêu cầu tạm trú</a></div>
+    <div class="item"><a href="{{ route('thongke.index') }}">Thống kê</a></div>
     <div class="item"><a href="" id="logout" style="color: red">Đăng Xuất</a></div>
 </div>
 

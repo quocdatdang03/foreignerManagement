@@ -25,6 +25,7 @@ return new class extends Migration
             $table->foreign('idNguoiDung')->references('idNguoiDung')->on('nguoi_dungs');
             $table->foreign('idPhuongXa')->references('idPhuongXa')->on('phuong_xas');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
     /**

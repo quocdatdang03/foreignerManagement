@@ -72,7 +72,7 @@ class CoSoLuuTrusController extends Controller
                 'matKhau' => bcrypt($request->input('matKhau')),
                 'soCCCD' => $request->input('soCCCD'),
                 'trangThai' => 'active',
-                'idVaiTro' => 2,
+                'idVaiTro' => 1,
                 'created_at' =>now(),
                 'updated_at' => now(),
             ]);

@@ -9,11 +9,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\GiayPhepController;
-use App\Http\Controllers\NguoiNuocNgoaiController;
 use App\Http\Controllers\CoSoLuuTrusController;
 use App\Http\Controllers\NguoiNuocNgoaiController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GiayPhepController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\NguoiDungController;
 use App\Http\Controllers\ThongKeController;
@@ -22,18 +19,22 @@ Route::get('/', function () {
     return view('user.userhome');
 });
 
-Route::resource('cosoluutrus', CoSoLuuTrusController::class);
-Route::put('/cosoluutrus/{cosoluutru}', [CoSoLuuTrusController::class, 'update']);
-Route::get('/cosoluutrus/create', [CoSoLuuTrusController::class, 'create'])->name('cosoluutrus.create');
-Route::post('/cosoluutrus', [CoSoLuuTrusController::class, 'store'])->name('cosoluutrus.store');
-Route::get('/cosoluutrus/search', [CoSoLuuTrusController::class, 'search'])->name('cosoluutrus.search');
+Route::middleware(['auth'])->group(function () {
+    Route::resource('cosoluutrus', CoSoLuuTrusController::class)->middleware('role:2');
+    Route::put('/cosoluutrus/{cosoluutru}', [CoSoLuuTrusController::class, 'update'])->middleware('role:2');
+    Route::get('/cosoluutrus/create', [CoSoLuuTrusController::class, 'create'])->name('cosoluutrus.create')->middleware('role:2');
+    Route::post('/cosoluutrus', [CoSoLuuTrusController::class, 'store'])->name('cosoluutrus.store')->middleware('role:2');
+    Route::get('/cosoluutrus/search', [CoSoLuuTrusController::class, 'search'])->name('cosoluutrus.search')->middleware('role:2');
 
-Route::get('/search-nguoi-dung', [NguoiDungController::class, 'search']);
-Route::get('/get-quanhuyen/{tinhThanhId}', [LocationController::class, 'getQuanHuyen']);
-Route::get('/get-phuongxa/{quanHuyenId}', [LocationController::class, 'getPhuongXa']);
+    Route::get('/search-nguoi-dung', [NguoiDungController::class, 'search'])->middleware('role:2');
+    Route::get('/get-quanhuyen/{tinhThanhId}', [LocationController::class, 'getQuanHuyen'])->middleware('role:2');
+    Route::get('/get-phuongxa/{quanHuyenId}', [LocationController::class, 'getPhuongXa'])->middleware('role:2');
+});
 
-Route::get('/thongke', [ThongKeController::class, 'index'])->name('thongke.index');
-Route::get('/giayphep/chart/data', [ThongKeController::class, 'getGiayPhepData'])->name('giayphep.chart.ajax');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/thongke', [ThongKeController::class, 'index'])->name('thongke.index')->middleware('role:2');
+    Route::get('/giayphep/chart/data', [ThongKeController::class, 'getGiayPhepData'])->name('giayphep.chart.ajax')->middleware('role:2');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/nguoinuocngoais', [NguoiNuocNgoaiController::class, 'index'])->name('nguoinuocngoais.index');
@@ -45,9 +46,9 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/giaypheps', [GiayPhepController::class, 'index'])->name('giaypheps.index')->middleware('role:2');
-    Route::get('/giaypheps/edit/{giayphep}', [GiayPhepController::class, 'edit'])->name('giaypheps.edit');
-    Route::put('/giaypheps/{giayphep}', [GiayPhepController::class, 'update'])->name('giaypheps.update');
-    Route::delete('/giaypheps/{giayphep}', [GiayPhepController::class, 'destroy'])->name('giaypheps.destroy');
+    Route::get('/giaypheps/edit/{giayphep}', [GiayPhepController::class, 'edit'])->name('giaypheps.edit')->middleware('role:2');
+    Route::put('/giaypheps/{giayphep}', [GiayPhepController::class, 'update'])->name('giaypheps.update')->middleware('role:2');
+    Route::delete('/giaypheps/{giayphep}', [GiayPhepController::class, 'destroy'])->name('giaypheps.destroy')->middleware('role:2');
 });
 
 // for NhanVienQuanLy

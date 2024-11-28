@@ -21,7 +21,7 @@ class QuanHuyenFactory extends Factory
     {
         return [
             'idTinhThanh' => TinhThanh::factory(),
-            'tenQuanHuyen' => $this->faker->word,
+            'tenQuanHuyen' => $this->faker->name,
         ];
     }
 }

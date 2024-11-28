@@ -28,14 +28,14 @@ class UpdateUserInfoController extends Controller
         $request->validate([
             'hoVaTen' => 'required|string|max:255',
             'sdt' => 'required|digits:10|unique:nguoi_dungs,sdt,' . $user->idNguoiDung . ',idNguoiDung',
-            'soCCCD' => 'required|string|size:14|unique:nguoi_dungs,soCCCD,' . $user->idNguoiDung . ',idNguoiDung',
+            'soCCCD' => 'required|string|size:12|unique:nguoi_dungs,soCCCD,' . $user->idNguoiDung . ',idNguoiDung',
         ], [
             'hoVaTen.required' => 'Vui lòng nhập họ và tên.',
             'sdt.required' => 'Vui lòng nhập số điện thoại.',
             'sdt.digits' => 'Số điện thoại phải có 10 chữ số.',
             'sdt.unique' => 'Số điện thoại đã được sử dụng.',
             'soCCCD.required' => 'Vui lòng nhập số CCCD.',
-            'soCCCD.size' => 'Số CCCD phải có đúng 14 ký tự.',
+            'soCCCD.size' => 'Số CCCD phải có đúng 12 ký tự.',
             'soCCCD.unique' => 'Số CCCD đã được sử dụng.',
         ]);
 

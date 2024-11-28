@@ -12,12 +12,8 @@ class TinhThanhSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
-        DB::table('tinh_thanhs')->insert([
-            ['tenTinhThanh' => 'Đà Nẵng'],
-            ['tenTinhThanh' => 'Hà Nội'],
-            ['tenTinhThanh' => 'TP. Hồ Chí Minh'],
-        ]);
+        TinhThanh::factory()->create();
     }
 }

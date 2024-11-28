@@ -22,7 +22,7 @@ return new class extends Migration
             $table->char('sdt', 10)->unique()->nullable();
             $table->string('matKhau');
             $table->string('hoVaTen');
-            $table->char('soCCCD', 14)->unique()->nullable();
+            $table->char('soCCCD', 12)->unique()->nullable();
             $table->string('trangThai')->default('active');
             $table->timestamps();
             $table->rememberToken();

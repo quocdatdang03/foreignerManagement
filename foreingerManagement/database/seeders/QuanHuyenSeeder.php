@@ -13,12 +13,26 @@ class QuanHuyenSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
-        DB::table('quan_huyens')->insert([
-            ['idTinhThanh' => 1, 'tenQuanHuyen' => 'Hải Châu'],
-            ['idTinhThanh' => 1, 'tenQuanHuyen' => 'Cẩm Lệ'],
-            ['idTinhThanh' => 2, 'tenQuanHuyen' => 'Hoàn Kiếm'],
-        ]);
+        $daNangId = TinhThanh::where('tenTinhThanh', 'Đà Nẵng')->first()->idTinhThanh;
+
+        $quanHuyens = [
+            'Hải Châu',
+            'Thanh Khê',
+            'Sơn Trà',
+            'Ngũ Hành Sơn',
+            'Liên Chiểu',
+            'Cẩm Lệ',
+            'Hòa Vang',
+            'Hoàng Sa',
+        ];
+
+        foreach ($quanHuyens as $quanHuyen) {
+            QuanHuyen::create([
+                'idTinhThanh' => $daNangId,
+                'tenQuanHuyen' => $quanHuyen,
+            ]);
+        }
     }
 }
