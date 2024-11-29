@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\UpdateUserInfoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\ChangePasswordController;
@@ -26,6 +27,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cosoluutrus', [CoSoLuuTrusController::class, 'store'])->name('cosoluutrus.store')->middleware('role:2');
     Route::get('/cosoluutrus/search', [CoSoLuuTrusController::class, 'search'])->name('cosoluutrus.search')->middleware('role:2');
 
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/search-nguoi-dung', [NguoiDungController::class, 'search'])->middleware('role:2');
     Route::get('/get-quanhuyen/{tinhThanhId}', [LocationController::class, 'getQuanHuyen'])->middleware('role:2');
     Route::get('/get-phuongxa/{quanHuyenId}', [LocationController::class, 'getPhuongXa'])->middleware('role:2');

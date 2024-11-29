@@ -27,7 +27,9 @@
                     </div>
                 </header>
             @endif
-
+    @auth
+        @include('vendor.Chatify.pages.app')
+    @endauth
             <!-- Page Content -->
             <main>
                 {{ $slot }}
