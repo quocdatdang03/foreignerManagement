@@ -50,7 +50,7 @@ class RegisteredUserController extends Controller
             'verification.verify', // Tên route
             now()->addMinutes(60), // Thời gian hết hạn
             [
-                'id' => $user->idNguoiDung, // ID của người dùng
+                'id' => $user->id, // ID của người dùng
                 'hash' => sha1($user->email), // Tạo hash từ email
             ]
         );

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('idCoSo');
             $table->string('tieuDe');
             $table->text('noiDung');
-            $table->foreign('idNguoiDung')->references('idNguoiDung')->on('nguoi_dungs');
+            $table->foreign('idNguoiDung')->references('id')->on('nguoi_dungs');
             $table->foreign('idCoSo')->references('idCoSo')->on('co_so_luu_trus');
             $table->timestamps();
         });

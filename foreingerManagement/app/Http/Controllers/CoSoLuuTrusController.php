@@ -77,7 +77,7 @@ class CoSoLuuTrusController extends Controller
                 'updated_at' => now(),
             ]);
 
-            $idNguoiDung = $nguoiDungMoi->idNguoiDung;
+            $idNguoiDung = $nguoiDungMoi->id;
 
         } else {
             $idNguoiDung = $request->input('idNguoiDungHidden');

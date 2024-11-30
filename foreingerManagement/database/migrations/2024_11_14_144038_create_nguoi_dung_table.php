@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('nguoi_dungs', function (Blueprint $table) {
-            $table->id('idNguoiDung');
+            $table->id();
             $table->unsignedBigInteger('idVaiTro');
             $table->string('email')->unique();
             $table->string('google_id')->unique()->nullable();

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->char('sdt', 10)->nullable();
             $table->string('email')->nullable();
             $table->string('loaiHinh');
-            $table->foreign('idNguoiDung')->references('idNguoiDung')->on('nguoi_dungs');
+            $table->foreign('idNguoiDung')->references('id')->on('nguoi_dungs');
             $table->foreign('idPhuongXa')->references('idPhuongXa')->on('phuong_xas');
             $table->timestamps();
             $table->softDeletes();

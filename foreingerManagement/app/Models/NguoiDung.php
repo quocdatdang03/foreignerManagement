@@ -13,7 +13,6 @@ class NguoiDung extends Authenticatable implements CanResetPassword
     use HasFactory;
 
     protected $table = 'nguoi_dungs';
-    protected $primaryKey = 'idNguoiDung';
     public $timestamps = false;
 
     protected $fillable = [

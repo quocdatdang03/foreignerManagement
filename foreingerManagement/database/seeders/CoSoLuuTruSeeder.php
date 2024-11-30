@@ -18,7 +18,7 @@ class CoSoLuuTruSeeder extends Seeder
     {
         CoSoLuuTru::factory(20)->create([
             'idNguoiDung' => function () {
-                return NguoiDung::inRandomOrder()->first()->idNguoiDung; // Chọn ngẫu nhiên một VaiTro đã có
+                return NguoiDung::inRandomOrder()->first()->id; // Chọn ngẫu nhiên một VaiTro đã có
             },
 
             'idPhuongXa' => function () {

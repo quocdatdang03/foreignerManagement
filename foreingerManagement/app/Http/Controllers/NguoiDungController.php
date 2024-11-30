@@ -19,7 +19,7 @@ class NguoiDungController extends Controller
         return response()->json([
             'results' => $nguoiDungs->map(function ($nguoiDung) {
                 return [
-                    'id' => $nguoiDung->idNguoiDung,
+                    'id' => $nguoiDung->id,
                     'text' => $nguoiDung->hoVaTen
                 ];
             })

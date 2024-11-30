@@ -27,8 +27,8 @@ class UpdateUserInfoController extends Controller
         // Xác thực dữ liệu đầu vào
         $request->validate([
             'hoVaTen' => 'required|string|max:255',
-            'sdt' => 'required|digits:10|unique:nguoi_dungs,sdt,' . $user->idNguoiDung . ',idNguoiDung',
-            'soCCCD' => 'required|string|size:12|unique:nguoi_dungs,soCCCD,' . $user->idNguoiDung . ',idNguoiDung',
+            'sdt' => 'required|digits:10|unique:nguoi_dungs,sdt,' . $user->id . ',id',
+            'soCCCD' => 'required|string|size:12|unique:nguoi_dungs,soCCCD,' . $user->id . ',id',
         ], [
             'hoVaTen.required' => 'Vui lòng nhập họ và tên.',
             'sdt.required' => 'Vui lòng nhập số điện thoại.',
