@@ -1,22 +1,3 @@
-{{-- -------------------- Saved Messages -------------------- --}}
-@if($get == 'saved')
-    <table class="messenger-list-item" data-contact="{{ Auth::user()->idNguoiDung }}">
-        <tr data-action="0">
-            {{-- Avatar side --}}
-            <td>
-            <div class="saved-messages avatar av-m">
-                <span class="far fa-bookmark"></span>
-            </div>
-            </td>
-            {{-- center side --}}
-            <td>
-                <p data-id="{{ Auth::user()->idNguoiDung }}" data-type="user">Saved Messages <span>You</span></p>
-                <span>Save messages secretly</span>
-            </td>
-        </tr>
-    </table>
-@endif
-
 {{-- -------------------- Contact list -------------------- --}}
 @if($get == 'users' && !!$lastMessage)
 <?php
@@ -52,7 +33,7 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
                 $lastMessageBody
             !!}
             @else
-            <span class="fas fa-file"></span> Attachment
+            <span class="fas fa-file"></span> Ảnh
             @endif
         </span>
         {{-- New messages counter --}}

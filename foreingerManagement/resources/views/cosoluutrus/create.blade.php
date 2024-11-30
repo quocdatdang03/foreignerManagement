@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm cơ sở lưu trú</title>
+    <title>Thêm mới Cơ sở lưu trú</title>
     <link rel="icon" href="{{ asset('fe/image/logo.png') }}">
     <link rel="stylesheet" href="{{ asset('fe/css/grid.css') }}">
     <link rel="stylesheet" href="{{ asset('fe/css/header-footer.css') }}">
