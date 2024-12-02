@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Đăng nhập</title>
     <link rel="icon" href="../fe/image/logo.png">
     <link rel="stylesheet" href="../fe/css/grid.css">
     <link rel="stylesheet" href="../fe/css/header-footer.css">
