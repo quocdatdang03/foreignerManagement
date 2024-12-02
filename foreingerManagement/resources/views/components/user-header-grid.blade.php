@@ -2,7 +2,7 @@
     <div class="container gridhead wide">
         <div class="item">
             <div class="logo">
-                <a href="./home.html"><img src="../fe/image/logo.png" alt=""></a>
+                <a href="/"><img src="../fe/image/logo.png" alt=""></a>
             </div>
         </div>
         <div class="item">
