@@ -30,10 +30,22 @@ class RegisteredUserController extends Controller
         $request->validate([
             'hoVaTen' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:nguoi_dungs,email'],
-            'sdt' => ['required', 'string', 'max:10', 'unique:nguoi_dungs,sdt'],
-            'soCCCD' => ['required', 'string', 'max:14', 'unique:nguoi_dungs,soCCCD'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+            'sdt' => ['required', 'string', 'digits:10', 'unique:nguoi_dungs,sdt'],
+            'soCCCD' => ['required', 'string', 'digits:12', 'unique:nguoi_dungs,soCCCD'],
+            'password' => ['required', 'confirmed', 'min:8', Rules\Password::defaults()],], 
+            ['hoVaTen.required' => 'Họ và tên là bắt buộc.',
+            'email.required' => 'Email là bắt buộc.',
+            'email.email' => 'Email không hợp lệ.',
+            'email.unique' => 'Email đã tồn tại.',
+            'sdt.required' => 'Số điện thoại là bắt buộc.',
+            'sdt.unique' => 'Số điện thoại này đã được sử dụng.',
+            'sdt.digits' => 'Số điện thoại phải có 10 chữ số.',
+            'soCCCD.required' => 'Vui lòng nhập số CCCD.',
+            'soCCCD.digits' => 'Số CCCD phải có đúng 12 chữ số.',
+            'soCCCD.unique' => 'Số CCCD đã được sử dụng.',
+            'password.required' => 'Mật khẩu là bắt buộc.',
+            'password.min' => 'Mật khẩu phải ít nhất có 8 ký tự.',
+            'password.confirmed' => 'Mật khẩu xác nhận không khớp.',]);
 
         $user = NguoiDung::create([
             'hoVaTen' => $request->hoVaTen,
